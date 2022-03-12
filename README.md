@@ -30,6 +30,7 @@ The app is developed based on the need of some kinds of visualization for the me
 * User can scan the menu page using the camera feature
 * User can retrieve a virtual page of menu
 * User can click on food titles to view the images
+* User can click on Order button and put the items on a different order tab. For each item, there will be shown the price and calories.
 
 **Optional Nice-to-have Stories**
 
@@ -39,29 +40,30 @@ The app is developed based on the need of some kinds of visualization for the me
 
 ### 2. Screen Archetypes
 
-* [list first screen here]
-   * [list associated required story here]
-   * ...
-* [list second screen here]
-   * [list associated required story here]
-   * ...
+* Menu
+   * User can scan the menu page using the camera feature
+   * User can retrieve a virtual page of menu
+   *  User can click on food titles to view the images
+* Order list
+   * User can click on Order button and put the items on a different order tab
 
 ### 3. Navigation
 
 **Tab Navigation** (Tab to Screen)
 
-* [fill out your first tab]
-* [fill out your second tab]
-* [fill out your third tab]
+* User Information
+* Menu Image
+* Order List
 
 **Flow Navigation** (Screen to Screen)
 
-* [list first screen here]
-   * [list screen navigation here]
-   * ...
-* [list second screen here]
-   * [list screen navigation here]
-   * ...
+* User
+   * User information
+   * User profile
+* Menu
+   * Menu image
+* Order list
+   * Order List
 
 ## Wireframes
 [Add picture of your hand sketched wireframes in this section]
