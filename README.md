@@ -11,17 +11,15 @@ Original App Design Project
 
 ## Overview
 ### Description
-[Description of your app]
 The app is developed based on the need of some kinds of visualization for the menus of different kinds of restaurants. Users are able to scan the menu and click on the food titles of their choice to view the preview images shown on the screen, which makes it easier for them to order.
 
 ### App Evaluation
-[Evaluation of your app across the following attributes]
 - **Category:** Food service/ Restaurant
 - **Mobile:** Mobile Application
 - **Story:** 
 - **Market:** Food service/ Customer service
-- **Habit:**
-- **Scope:**
+- **Habit:** 
+- **Scope:** General public
 
 ## Product Spec
 
@@ -29,13 +27,15 @@ The app is developed based on the need of some kinds of visualization for the me
 
 **Required Must-have Stories**
 
-* [fill in your required user stories here]
-* ...
+* User can scan the menu page using the camera feature
+* User can retrieve a virtual page of menu
+* User can click on food titles to view the images
 
 **Optional Nice-to-have Stories**
 
-* [fill in your required user stories here]
-* ...
+* User can view the translated title of their own language
+* User can leave reviews after finishing their meal
+* User can see ingredients along with dish image itself
 
 ### 2. Screen Archetypes
 
