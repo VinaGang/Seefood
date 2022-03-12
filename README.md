@@ -1,7 +1,7 @@
-Original App Design Project - README Template
+Original App Design Project
 ===
 
-# APP_NAME_HERE
+# SEEFOOD
 
 ## Table of Contents
 1. [Overview](#Overview)
@@ -12,13 +12,14 @@ Original App Design Project - README Template
 ## Overview
 ### Description
 [Description of your app]
+The app is developed based on the need of some kinds of visualization for the menus of different kinds of restaurants. Users are able to scan the menu and click on the food titles of their choice to view the preview images shown on the screen, which makes it easier for them to order.
 
 ### App Evaluation
 [Evaluation of your app across the following attributes]
-- **Category:**
-- **Mobile:**
-- **Story:**
-- **Market:**
+- **Category:** Food service/ Restaurant
+- **Mobile:** Mobile Application
+- **Story:** 
+- **Market:** Food service/ Customer service
 - **Habit:**
 - **Scope:**
 
