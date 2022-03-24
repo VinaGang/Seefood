@@ -76,9 +76,41 @@ The app is developed based on the need of visualization and images for menus of 
 ### [BONUS] Interactive Prototype
 
 ## Schema 
-[This section will be completed in Unit 9]
 ### Models
-[Add table of models]
+
+#### User
+
+   | Property      | Type     | Description                            |
+   | ------------- | -------- | ---------------------------------------|
+   | objectId      | String   | unique id for the user (default field) |
+   | email         | String   | email address of the user (primary key)|
+   | password      | String   | password of the user (hidden)          |
+   | profilePic    | File     | profile picture of the user to be shown|
+   | createdAt     | DateTime | date when the user was created         |
+   | previousRes   | Array    | list of previous restaurants visited   |
+   
+   
+#### Menu
+
+   | Property      | Type     | Description                              |
+   | ------------- | -------- | -----------------------------------------|
+   | objectId      | String   | unique id for the menu (default field)   |
+   | menuName      | String   | name of the menu generated               |
+   | restoName     | String   | name of the restaurant associated with it|
+   | foodTitles    | Array    | array of Food that the menu have         |
+   | createdAt     | DateTime | date when the menu was created           |
+   
+#### Food
+
+   | Property      | Type     | Description                              |
+   | ------------- | -------- | -----------------------------------------|
+   | objectId      | String   | unique id for the food (default field)   |
+   | name          | String   | name of the food generated in menu       |
+   | calories      | String   | amount of calories that the food has     |
+   | restaurant    | String   | name of the restaurant associated with it|
+   | foodPic       | DateTime | dpicture of the food                     |
+   
+   
 ### Networking
 - [Add list of network requests by screen ]
 - [Create basic snippets for each Parse network request]
