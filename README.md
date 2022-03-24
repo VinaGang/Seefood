@@ -68,12 +68,7 @@ The app is developed based on the need of visualization and images for menus of 
    * Order List
 
 ## Wireframes
-[Add picture of your hand sketched wireframes in this section]
-<img src="YOUR_WIREFRAME_IMAGE_URL" width=600>
-
-### [BONUS] Digital Wireframes & Mockups
-
-### [BONUS] Interactive Prototype
+<img src="wireframe.jpg" width=600>
 
 ## Schema 
 ### Models
