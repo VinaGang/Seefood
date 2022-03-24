@@ -94,6 +94,7 @@ The app is developed based on the need of visualization and images for menus of 
    | restoName     | String   | name of the restaurant associated with it|
    | foodTitles    | Array    | array of Food that the menu have         |
    | createdAt     | DateTime | date when the menu was created           |
+   | itemPrice     | Float    | price of the item                        |
    
 #### Food
 
@@ -105,6 +106,7 @@ The app is developed based on the need of visualization and images for menus of 
    | restaurant    | String   | name of the restaurant associated with it|
    | foodPic       | DateTime | dpicture of the food                     |
    | createdAt     | DateTime | date when the food was created           |
+   | itemPrice     | Float    | price of the item                        |
    
    
 #### Cart
@@ -117,6 +119,8 @@ The app is developed based on the need of visualization and images for menus of 
    | restaurant    | String         | name of the restaurant associated with it|
    | foodPic       | DateTime       | dpicture of the food                     |
    | createdAt     | DateTime       | date when the cart was created           |
+   | itemPrice     | Float          | price of the item                        |
+   | totalPrice    | Float          | total price of the cart                  |
    
    
 ### Networking
