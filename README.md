@@ -81,7 +81,7 @@ The app is developed based on the need of visualization and images for menus of 
 #### User
 
    | Property      | Type     | Description                            |
-   | ------------- | -------- | ---------------------------------------|
+   | ------------- | -------- | -------------------------------------- |
    | objectId      | String   | unique id for the user (default field) |
    | email         | String   | email address of the user (primary key)|
    | password      | String   | password of the user (hidden)          |
@@ -93,7 +93,7 @@ The app is developed based on the need of visualization and images for menus of 
 #### Menu
 
    | Property      | Type     | Description                              |
-   | ------------- | -------- | -----------------------------------------|
+   | ------------- | -------- | ---------------------------------------- |
    | objectId      | String   | unique id for the menu (default field)   |
    | menuName      | String   | name of the menu generated               |
    | restoName     | String   | name of the restaurant associated with it|
@@ -103,15 +103,92 @@ The app is developed based on the need of visualization and images for menus of 
 #### Food
 
    | Property      | Type     | Description                              |
-   | ------------- | -------- | -----------------------------------------|
+   | ------------- | -------- | ---------------------------------------- |
    | objectId      | String   | unique id for the food (default field)   |
    | name          | String   | name of the food generated in menu       |
    | calories      | String   | amount of calories that the food has     |
    | restaurant    | String   | name of the restaurant associated with it|
    | foodPic       | DateTime | dpicture of the food                     |
+   | createdAt     | DateTime | date when the food was created           |
+   
+   
+#### Cart
+
+   | Property      | Type           | Description                              |
+   | ------------- | -------------- | ---------------------------------------- |
+   | objectId      | String         | unique id for the cart (default field)   |
+   | user          | User Pointer   | points to the cart owner                 |
+   | items         | Array          | array of Food that was requested         |
+   | restaurant    | String         | name of the restaurant associated with it|
+   | foodPic       | DateTime       | dpicture of the food                     |
+   | createdAt     | DateTime       | date when the cart was created           |
    
    
 ### Networking
-- [Add list of network requests by screen ]
-- [Create basic snippets for each Parse network request]
-- [OPTIONAL: List endpoints if using existing API such as Yelp]
+   - Main Activity Screen
+      - (Read/GET) Query all food included in the menu
+         ```java
+         db.collection("food")
+        .whereEqualTo("restaurant", "Pho Cali")
+        .get()
+        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Log.d(TAG, document.getId() + " => " + document.getData());
+                    }
+                } else {
+                    Log.d(TAG, "Error getting documents: ", task.getException());
+                }
+            }
+        });
+         ```
+      - (Create/POST) Create a new entry of food on a post
+          ```java
+          Map<String, Object> food = new HashMap<>();
+          food.put("name", "Pho");
+          food.put("restaurant", "Pho Cali");
+
+          db.collection("Food").document("Pho")
+                  .set(food)
+                  .addOnSuccessListener(new OnSuccessListener<Void>() {
+                      @Override
+                      public void onSuccess(Void aVoid) {
+                          Log.d(TAG, "DocumentSnapshot successfully written!");
+                      }
+                  })
+                  .addOnFailureListener(new OnFailureListener() {
+                      @Override
+                      public void onFailure(@NonNull Exception e) {
+                          Log.w(TAG, "Error writing document", e);
+                      }
+                  });
+         ```
+      - (Create/POST) Create a new entry of menu on a post
+      - (Delete) Delete a specific menu item
+        ```java
+        db.collection("cities").document("Pho")
+        .delete()
+        .addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d(TAG, "DocumentSnapshot successfully deleted!");
+            }
+        })
+        .addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w(TAG, "Error deleting document", e);
+            }
+        });
+        ```
+      - (Delete) Delete a specific food item
+   - Order Cart Screen
+      - (Create/POST) Create a cart for the user
+      - (Read/GET) Query the cart of the user
+      - (submit/POST) Post the cart to the owner of the restaurant
+   - Profile Screen
+      - (Read/GET) Query logged in user object
+      - (Read/GET) Query logged in user saved menus
+      - (Update/PUT) Update user profile image
