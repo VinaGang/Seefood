@@ -27,18 +27,21 @@ The app is developed based on the need of visualization and images for menus of 
 
 **Required Must-have Stories**
 
-* User can scan a menu using the camera feature of the phone
-* User can see a virtual version of the menu wherein the texts in the images are present in this virtual menu
-* User can click on food titles to view its corresponding image.
+* Scan a menu using the camera feature of the phone
+* See a virtual version of the menu wherein the texts in the images are present in this virtual menu
+* Click on food titles to view its corresponding image.
+* Add items on cart
+* View cart
+* Delete cart
 
 **Optional Nice-to-have Stories**
 
-* User can click on Order button and put the items on a different order tab. For each item, there will be shown the price and calories.
-* User can view the translated title on their own language
-* User can leave reviews after finishing their meal
-* User can see ingredients along with dish image itself
-* User can save the menu in their account
-* User can post the menu on other restaurants where they dined-in.
+* Click on Order button and put the items on a different order tab. For each item, there will be shown the price and calories.
+* View the translated title on their own language
+* Leave reviews after finishing their meal
+* See ingredients along with dish image itself
+* Save the menu in their account
+* Post the menu on other restaurants where they dined-in.
 
 ### 2. Screen Archetypes
 
