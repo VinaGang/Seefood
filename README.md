@@ -68,7 +68,6 @@ The app is developed based on the need of visualization and images for menus of 
    * Order List
 
 ## Wireframes
-<img src="wireframe.jpg" width=600>
 
 ## Schema 
 ### Models
