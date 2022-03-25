@@ -30,6 +30,7 @@ The app is developed based on the need of visualization and images for menus of 
 * Scan a menu using the camera feature of the phone
 * See a virtual version of the menu wherein the texts in the images are present in this virtual menu
 * Click on food titles to view its corresponding image.
+* Rate the accuracy of the images
 * View the translated title on their own language
 
 **Optional Nice-to-have Stories**
@@ -99,16 +100,17 @@ The app is developed based on the need of visualization and images for menus of 
    
 #### Food
 
-   | Property      | Type     | Description                              |
-   | ------------- | -------- | ---------------------------------------- |
-   | objectId      | String   | unique id for the food (default field)   |
-   | name          | String   | name of the food generated in menu       |
-   | calories      | String   | amount of calories that the food has     |
-   | restaurant    | String   | name of the restaurant associated with it|
-   | foodPic       | DateTime | dpicture of the food                     |
-   | createdAt     | DateTime | date when the food was created           |
-   | itemPrice     | Float    | price of the item                        |
-   
+   | Property         | Type     | Description                              |
+   | -------------    | -------- | ---------------------------------------- |
+   | objectId         | String   | unique id for the food (default field)   |
+   | name             | String   | name of the food generated in menu       |
+   | calories         | String   | amount of calories that the food has     |
+   | restaurant       | String   | name of the restaurant associated with it|
+   | foodPic          | DateTime | dpicture of the food                     |
+   | createdAt        | DateTime | date when the food was created           |
+   | itemPrice        | Float    | price of the item                        |
+   | foodPicMetaData  | String   | food Pic data information                |
+   | accuratedRate    | int      | Accuracy of the foodPic                  |
    
 #### Cart
 
