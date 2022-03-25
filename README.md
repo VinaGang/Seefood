@@ -33,15 +33,14 @@ The app is developed based on the need of visualization and images for menus of 
 * View the translated title on their own language
 
 **Optional Nice-to-have Stories**
-
+* Add items on cart
+* View cart
+* Delete cart
 * Click on Order button and put the items on a different order tab. For each item, there will be shown the price and calories.
 * Leave reviews after finishing their meal
 * See ingredients along with dish image itself
 * Save the menu in their account
 * Post the menu on other restaurants where they dined-in.
-* Add items on cart
-* View cart
-* Delete cart
 
 ### 2. Screen Archetypes
 
