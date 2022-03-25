@@ -30,9 +30,7 @@ The app is developed based on the need of visualization and images for menus of 
 * Scan a menu using the camera feature of the phone
 * See a virtual version of the menu wherein the texts in the images are present in this virtual menu
 * Click on food titles to view its corresponding image.
-* Add items on cart
-* View cart
-* Delete cart
+
 
 **Optional Nice-to-have Stories**
 
@@ -42,6 +40,9 @@ The app is developed based on the need of visualization and images for menus of 
 * See ingredients along with dish image itself
 * Save the menu in their account
 * Post the menu on other restaurants where they dined-in.
+* Add items on cart
+* View cart
+* Delete cart
 
 ### 2. Screen Archetypes
 
