@@ -56,19 +56,30 @@ The app is developed based on the need of visualization and images for menus of 
 
 **Tab Navigation** (Tab to Screen)
 
-* User Information
-* Menu Image
-* Order List
+* User Information: 
+  * User can login using their own criteria then choose a place they are dining at.
+  * After logging in, they can see a newsfeed of image posts at the specific restaurant they are dining in.
+  * User can also post the image of their items and give reviews.
+* Menu Scan:
+  * Scan menu to output a clickable food titles.
+  * By clicking on the titles, user can see the image of the item they have chosen.
+* Order List:
+  * User can add the item they have chosen to this list of items and submit after they are ready to order. 
 
 **Flow Navigation** (Screen to Screen)
 
 * User
    * User information
-   * User profile
-* Menu
-   * Menu image
+   * User login
+   * Location/Restaurant option
+   * Food post newsfeed
+* Menu scan
+   * Camera capture to scan the menu
+   * Error/Success capture messages
+   * A virtual page of the scanned menu
 * Order list
-   * Order List
+   * Order item lists
+   * Total price
 
 ## Wireframes
 <img src="wireframe.jpg" height=600></img>
