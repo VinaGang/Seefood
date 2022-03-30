@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "549455716485",
+    "project_id": "seefood-60e84",
+    "storage_bucket": "seefood-60e84.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:549455716485:android:f2f5666d7e09dfeff1c9ec",
+        "android_client_info": {
+          "package_name": "com.example.seefood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "549455716485-r2rmttcqrl10scf2d32jfi7qc89l1mbn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMaLpJUJuHzLpwu-1-oUXj2jhIiCg-f0M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "549455716485-r2rmttcqrl10scf2d32jfi7qc89l1mbn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
