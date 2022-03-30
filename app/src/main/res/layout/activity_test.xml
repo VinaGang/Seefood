@@ -11,12 +11,38 @@
         android:id="@+id/imageBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="292dp"
+        android:layout_marginTop="24dp"
         android:padding="20dp"
-        android:text="Get Image"
+        android:text="Get Text in Image"
+        android:textColor="#595959"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/ivSampleImage" />
+
+    <ImageView
+        android:id="@+id/ivSampleImage"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="36dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/tvResultText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="sans-serif-condensed"
+        android:textColor="#474646"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageBtn"
+        tools:text="Sample Text" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
