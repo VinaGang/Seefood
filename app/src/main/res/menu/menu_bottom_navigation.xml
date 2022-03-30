@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:icon="@drawable/home_selector"
+        android:title="action_home"
+        app:showAsAction="always"
+        android:enabled="true"/>
+    <item
+        android:icon="@drawable/camera_selector"
+        android:title="action_camera"
+        app:showAsAction="always"
+        android:enabled="true"/>
+    <item
+        android:icon="@drawable/cart_selector"
+        android:title="action_cart"
+        app:showAsAction="always"
+        android:enabled="true"/>
+</menu>
