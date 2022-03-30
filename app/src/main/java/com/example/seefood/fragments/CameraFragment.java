@@ -1,24 +1,26 @@
-package com.example.seefood;
+package com.example.seefood.fragments;
 
 import android.graphics.Bitmap;
-import android.graphics.Point;
-import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.example.seefood.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -28,7 +30,8 @@ import com.google.mlkit.vision.text.TextRecognition;
 import com.google.mlkit.vision.text.TextRecognizer;
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
 
-public class TestActivity extends AppCompatActivity {
+
+public class CameraFragment extends Fragment {
 
     private static final String TAG = "TestActivity";
 
@@ -39,22 +42,30 @@ public class TestActivity extends AppCompatActivity {
     TextView tvResultText;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_camera, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
 
         //Retrieve Button
-        Button imageBtn = findViewById(R.id.imageBtn);
+        Button imageBtn = view.findViewById(R.id.imageBtn);
 
         //Retrieve the textView for result
-        tvResultText = findViewById(R.id.tvResultText);
+        tvResultText = view.findViewById(R.id.tvResultText);
 
         TextRecognizer recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS);
 
         //create a sample image here
-        ImageView ivSampleImage = findViewById(R.id.ivSampleImage);
+        ImageView ivSampleImage = view.findViewById(R.id.ivSampleImage);
 
-        Glide.with(this)
+        Glide.with(getContext())
                 .asBitmap()
                 .load("https://images.squarespace-cdn.com/content/v1/5cf4bd06f614ef00014ea1df/1617134060935-EP65IP6VQ9I6I8J702UN/codepath-1x1_solid-dark.png?format=500w")
                 .into(new CustomTarget<Bitmap>() {
