@@ -3,23 +3,25 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/catuy/Projects/Seefood/app/src/main/res/drawable/box.xml" value="0.117" />
         <entry key="..\:/Users/catuy/Projects/Seefood/app/src/main/res/drawable/camera_selector.xml" value="0.1" />
         <entry key="..\:/Users/catuy/Projects/Seefood/app/src/main/res/drawable/cart_selector.xml" value="0.1315" />
         <entry key="..\:/Users/catuy/Projects/Seefood/app/src/main/res/drawable/home_selector.xml" value="0.1155" />
+        <entry key="..\:/Users/catuy/Projects/Seefood/app/src/main/res/drawable/ic_eco_food.xml" value="0.1" />
         <entry key="..\:/Users/catuy/Projects/Seefood/app/src/main/res/drawable/ic_home_icon.xml" value="0.1155" />
         <entry key="..\:/Users/catuy/Projects/Seefood/app/src/main/res/drawable/ic_home_icon_silhouette_svgrepo_com.xml" value="0.1155" />
         <entry key="..\:/Users/catuy/Projects/Seefood/app/src/main/res/drawable/ic_photo_camera.xml" value="0.1155" />
         <entry key="..\:/Users/catuy/Projects/Seefood/app/src/main/res/drawable/ic_photo_camera_selected.xml" value="0.1155" />
         <entry key="..\:/Users/catuy/Projects/Seefood/app/src/main/res/drawable/ic_shopping_cart_outline.xml" value="0.1" />
         <entry key="..\:/Users/catuy/Projects/Seefood/app/src/main/res/drawable/ic_shopping_cart_outline_selected.xml" value="0.1155" />
+        <entry key="..\:/Users/catuy/Projects/Seefood/app/src/main/res/drawable/login_bg.xml" value="0.1" />
+        <entry key="..\:/Users/catuy/Projects/Seefood/app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="..\:/Users/catuy/Projects/Seefood/app/src/main/res/layout/activity_main.xml" value="0.13924050632911392" />
+        <entry key="..\:/Users/catuy/Projects/Seefood/app/src/main/res/layout/fragment_cart.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/catuy/Projects/Seefood/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="..\:/Users/catuy/Projects/Seefood/app/src/main/res/layout/login_tab_fragment.xml" value="0.22" />
+        <entry key="..\:/Users/catuy/Projects/Seefood/app/src/main/res/layout/signup_tab_fragment.xml" value="0.14666666666666667" />
         <entry key="..\:/Users/catuy/Projects/Seefood/app/src/main/res/menu/menu_bottom_navigation.xml" value="0.22" />
-        <entry key="..\:/Vernon/Seefood/app/src/main/res/layout/activity_main.xml" value="0.2" />
-        <entry key="..\:/Vernon/Seefood/app/src/main/res/layout/activity_test.xml" value="0.2" />
-        <entry key="..\:/Vernon/Seefood/app/src/main/res/layout/fragment_camera.xml" value="0.17198581560283688" />
-        <entry key="..\:/Vernon/Seefood/app/src/main/res/layout/fragment_cart.xml" value="0.17074275362318841" />
-        <entry key="..\:/Vernon/Seefood/app/src/main/res/layout/fragment_home.xml" value="0.17198581560283688" />
-        <entry key="..\:/Vernon/Seefood/app/src/main/res/menu/menu_bottom_navigation.xml" value="0.3482051282051282" />
       </map>
     </option>
   </component>
