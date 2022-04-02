@@ -3,14 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context=".LoginActivity">
+    android:layout_height="match_parent"
+    tools:context=".statics.LoginActivity">
 
     <ImageView
         android:id="@+id/ivBackground"
         android:layout_width="match_parent"
-        android:layout_height="277dp"
+        android:layout_height="312dp"
         android:alpha="0.4"
+        android:scaleType="centerCrop"
         app:srcCompat="@drawable/food_pic" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,12 +22,14 @@
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tlTabs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="418dp"
+            android:layout_height="67dp"
             android:layout_margin="5dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/login_bg"
             app:layout_constraintBaseline_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.571"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:tabGravity="fill"
@@ -68,7 +71,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
         app:srcCompat="@drawable/ic_eco_food" />
-
 
 
 </RelativeLayout>

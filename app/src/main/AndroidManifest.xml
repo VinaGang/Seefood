@@ -10,10 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Seefood">
         <activity
-            android:name=".MainActivity"
+            android:name=".statics.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".statics.LoginActivity"
             android:exported="true"
             android:windowSoftInputMode="stateVisible|adjustResize">
             <intent-filter>

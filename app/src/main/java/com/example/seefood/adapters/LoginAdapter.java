@@ -1,4 +1,4 @@
-package com.example.seefood;
+package com.example.seefood.adapters;
 
 import android.content.Context;
 import android.os.Bundle;
