@@ -1,14 +1,13 @@
-package com.example.seefood;
+package com.example.seefood.statics;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.app.TabActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 
+import com.example.seefood.R;
+import com.example.seefood.adapters.LoginAdapter;
 import com.google.android.material.tabs.TabLayout;
 
 public class LoginActivity extends AppCompatActivity {

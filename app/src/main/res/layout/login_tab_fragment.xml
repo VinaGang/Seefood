@@ -6,13 +6,13 @@
     android:layout_marginEnd="20dp">
 
     <EditText
-        android:id="@+id/etUsername"
+        android:id="@+id/etuserEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:background="@drawable/box"
         android:ems="10"
-        android:hint="Username"
+        android:hint="Email"
         android:inputType="textPersonName"
         android:padding="10dp" />
 
@@ -20,7 +20,7 @@
         android:id="@+id/etPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etUsername"
+        android:layout_below="@+id/etuserEmail"
         android:layout_marginTop="10dp"
         android:background="@drawable/box"
         android:hint="Password"
