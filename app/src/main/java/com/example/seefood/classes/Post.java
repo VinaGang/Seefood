@@ -4,18 +4,16 @@ public class Post {
     private String description;
     private String imageURL;
     private float rating;
-    private String profileURL;
+    private String userID;
 
     public Post(){};
 
-    public Post(String description, String imageURL, float rating) {
+
+    public Post(String description, String imageURL, float rating, String userID) {
         this.description = description;
         this.imageURL = imageURL;
         this.rating = rating;
-    }
-
-    public String getDescription() {
-        return description;
+        this.userID = userID;
     }
 
     public String getImageURL() {
@@ -25,6 +23,12 @@ public class Post {
     public float getRating() {
         return rating;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getUserID() {return userID;}
 }
 
 

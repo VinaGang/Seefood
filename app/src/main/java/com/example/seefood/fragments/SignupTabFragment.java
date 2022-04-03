@@ -67,17 +67,18 @@ public class SignupTabFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 String email = etEmail.getText().toString();
+                String username = etNewUsername.getText().toString();
                 String password = etConfirmPassword.getText().toString();
                 if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
                     Toast.makeText(getContext(), "Email or password cannot be empty!", Toast.LENGTH_LONG).show();
                     return;
                 }
-                if (etNewPassword.getText().toString() != password) {
+                if (!etNewPassword.getText().toString().equals(password)) {
                     Toast.makeText(getContext(), "Password doesn't match! Please try again.", Toast.LENGTH_LONG).show();
                     return;
                 }
 
-                user = new User(email, password);
+                user = new User(email, password, username);
                 registerUser(email, password);
             }
         });
