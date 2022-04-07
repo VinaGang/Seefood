@@ -16,6 +16,8 @@ import com.bumptech.glide.Glide;
 import com.example.seefood.R;
 import com.example.seefood.models.Post;
 import com.example.seefood.models.User;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,14 +26,17 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
-public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
-    private Context context;
-    private List<Post> posts;
+public class PostsAdapter extends FirebaseRecyclerAdapter<Post, PostsAdapter.ViewHolder> {
 
-    public PostsAdapter(Context context, List<Post> posts) {
+    private Context context;
+    private FirebaseRecyclerOptions<Post> posts;
+
+    public PostsAdapter(Context context, FirebaseRecyclerOptions<Post> posts) {
+        super(posts);
         this.context = context;
         this.posts = posts;
     }
+
 
     @NonNull
     @Override
@@ -41,15 +46,21 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Post post = posts.get(position);
-        holder.bind(post);
+    protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Post post) {
+
+        String imageURL = post.getImageURL();
+        User user = post.getUser();
+
+        if(user != null){
+            holder.tvUsername.setText(user.getUsername());
+            Glide.with(context).load(user.getProfilePicURL()).into(holder.ivProfilePic);
+        }
+        
+        Glide.with(context).load(imageURL).into(holder.ivImage);
+        holder.rbRatingReview.setRating(post.getRating());
+
     }
 
-    @Override
-    public int getItemCount() {
-        return posts.size();
-    }
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
@@ -66,40 +77,6 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
             ivImage = itemView.findViewById(R.id.ivImage);
             rbRatingReview = itemView.findViewById(R.id.rbRatingReview);
         }
-
-        public void bind(Post post){
-            String imageURL = post.getImageURL();
-            String userID = post.getUserID();
-            databaseReference = FirebaseDatabase.getInstance().getReference("user").child(userID);
-            databaseReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    User user = snapshot.getValue(User.class);
-                    String username = user.getUsername();
-                    tvUsername.setText(username);
-                    Glide.with(context).load(user.getProfilePicURL()).into(ivProfilePic);
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-            Glide.with(context).load(imageURL).into(ivImage);
-            rbRatingReview.setRating(post.getRating());
-        }
-    }
-
-    public void clear(){
-        posts.clear();
-        Log.d("POST ADAPTER: Clear",  posts.toString());
-        notifyDataSetChanged();
-    }
-
-    public void addAll(List<Post> post_list){
-        posts.addAll(post_list);
-        Log.d("POST ADAPTER: ",  post_list.toString());
-        notifyDataSetChanged();
     }
 }
 

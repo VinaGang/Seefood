@@ -42,8 +42,9 @@ public class HomeFragment extends Fragment {
     private FloatingActionButton fbtnCompose;
     protected PostsAdapter postsAdapter;
     private RecyclerView rvPosts;
-    protected List<Post> allPosts;
     protected SwipeRefreshLayout swipeContainer;
+    DatabaseReference postRef;
+    FirebaseRecyclerOptions<Post> options;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -53,15 +54,20 @@ public class HomeFragment extends Fragment {
         fbtnCompose = view.findViewById(R.id.fbtnCompose);
         rvPosts = view.findViewById(R.id.rvPosts);
 
-        allPosts = new ArrayList<>();
-        postsAdapter = new PostsAdapter(getContext(), allPosts);
-
         swipeContainer = view.findViewById(R.id.swipeContainer);
 
         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
+
+        postRef = FirebaseDatabase.getInstance().getReference("post");
+
+        options = new FirebaseRecyclerOptions.Builder<Post>()
+                .setQuery(postRef, Post.class)
+                .build();
+
+        postsAdapter = new PostsAdapter(getContext(), options);
 
         rvPosts.setAdapter(postsAdapter);
 
@@ -75,9 +81,6 @@ public class HomeFragment extends Fragment {
                 queryPosts();
             }
         });
-        Log.d("home: ", "call query");
-
-        queryPosts();
 
         fbtnCompose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,31 +100,28 @@ public class HomeFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        postsAdapter.startListening();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        postsAdapter.stopListening();
+    }
+
     private void queryPosts() {
-        ProgressDialog progressDialog = ProgressDialog.show(getContext(), "Loading", "Loading posts", true);
-        Log.d("home: ", "queryPost");
-        DatabaseReference postRef = FirebaseDatabase.getInstance().getReference("post");
-        postRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    Post post = dataSnapshot.getValue(Post.class);
-                    Log.d("home: item ", post.toString());
-                    allPosts.add(post);
-                }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+        FirebaseRecyclerOptions<Post> options = new FirebaseRecyclerOptions.Builder<Post>()
+                .setQuery(postRef, Post.class)
+                .build();
 
-            }
-        });
+        postsAdapter = new PostsAdapter(getContext(), options);
 
-        postsAdapter.clear();
-        postsAdapter.addAll(allPosts);
-        progressDialog.dismiss();
+        postsAdapter.notifyDataSetChanged();
 
-        Log.d("home: ", allPosts.toString());
         swipeContainer.setRefreshing(false);
 
     }
