@@ -10,6 +10,7 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -20,19 +21,24 @@ import android.widget.Toast;
 
 import com.example.seefood.R;
 import com.example.seefood.models.Post;
+import com.example.seefood.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 public class ComposeActivity extends AppCompatActivity {
 
+    public static final String TAG = "ComposeActivity";
     private EditText etDescription;
     private RatingBar rbRating;
     private Post composePost;
@@ -42,15 +48,14 @@ public class ComposeActivity extends AppCompatActivity {
     private String description;
     private Button btnSubmit;
     private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference databaseReference;
+    private DatabaseReference databaseReference, userDatabaseReference;
     private FloatingActionButton fbtnCompose;
     private ImageView ivfoodImage;
     private StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Food Images");
     private Uri foodPicUri;
     private String imageURL;
     private FirebaseUser currentUser;
-
-
+    private User curUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +66,21 @@ public class ComposeActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
+
+        //get data of current user
+        userDatabaseReference = firebaseDatabase.getReference("user").child(currentUser.getUid());
+
+        userDatabaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                curUser = snapshot.getValue(User.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         etDescription = findViewById(R.id.etDescription);
         rbRating = findViewById(R.id.rbRating);
@@ -100,7 +120,7 @@ public class ComposeActivity extends AppCompatActivity {
         });
     }
 
-    public void updateUI(FirebaseUser currentUser) {
+    public void updateUI() {
         String keyID = databaseReference.push().getKey();
         databaseReference.child(keyID).setValue(composePost);
         Intent login = new Intent(this, MainActivity.class);
@@ -121,9 +141,8 @@ public class ComposeActivity extends AppCompatActivity {
 
                                 imageURL = task.getResult().toString();
                                 description = etDescription.getText().toString();
-                                userID = currentUser.getUid();
-                                composePost = new Post(description, imageURL, userRating, userID);
-                                updateUI(currentUser);
+                                composePost = new Post(description, imageURL, userRating, curUser);
+                                updateUI();
 
                                 if(description == null){
                                     Toast.makeText(ComposeActivity.this, "Description cannot be empty!", Toast.LENGTH_SHORT).show();
