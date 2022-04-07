@@ -1,7 +1,10 @@
 package com.example.seefood.fragments;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -12,8 +15,10 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,6 +32,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.example.seefood.R;
+import com.google.android.gms.cast.framework.media.ImagePicker;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -36,6 +42,7 @@ import com.google.mlkit.vision.text.TextRecognition;
 import com.google.mlkit.vision.text.TextRecognizer;
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
 
+import java.io.File;
 import java.io.IOException;
 
 
@@ -48,6 +55,9 @@ public class CameraFragment extends Fragment {
 
     //textview for result
     TextView tvResultText;
+
+    File photoFile;
+    private String photoFileName = "photo.jpg";
 
     TextRecognizer recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS);
 
@@ -62,12 +72,13 @@ public class CameraFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == 200){
+        if(requestCode == 1){
 
-            Log.i(TAG, "It went here");
-            Uri imageUri = data.getData();
-            try {
-                image = InputImage.fromFilePath(getContext(), imageUri);
+            if(resultCode == RESULT_OK){
+
+                Log.i(TAG, "It went here");
+                Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
+                image = InputImage.fromBitmap(takenImage, 0);
 
                 //process the image
                 Task<Text> result =
@@ -91,8 +102,7 @@ public class CameraFragment extends Fragment {
 
                                         Log.e(TAG, "Unsuccessful");
                                     }});
-            } catch (IOException e) {
-                e.printStackTrace();
+
             }
 
         }
@@ -143,9 +153,15 @@ public class CameraFragment extends Fragment {
                 Intent intent = new
                         Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
+                photoFile = getPhotoFileUri(photoFileName);
+
+                Uri fileProvider = FileProvider.getUriForFile(getContext(), "com.codepath.fileprovider", photoFile);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
+
+
                 // start the image capture Intent
                 startActivityForResult(intent,
-                        200);
+                        1);
 
             }
         });
@@ -176,11 +192,24 @@ public class CameraFragment extends Fragment {
             stringBuilder.append(block.getText().toString()).append("\n");
         }
 
-        if(stringBuilder.toString().isEmpty())
-            tvResultText.setText("Empty string");
-
         //set the text to the textview
         tvResultText.setText(stringBuilder.toString());
 
+    }
+
+    // Returns the File for a photo stored on disk given the fileName
+    public File getPhotoFileUri(String fileName) {
+        // Get safe storage directory for photos
+        // Use `getExternalFilesDir` on Context to access package-specific directories.
+        // This way, we don't need to request external read/write runtime permissions.
+        File mediaStorageDir = new File(getContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES), TAG);
+
+        // Create the storage directory if it does not exist
+        if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){
+            Log.d(TAG, "failed to create directory");
+        }
+
+        // Return the file target for the photo based on filename
+        return new File(mediaStorageDir.getPath() + File.separator + fileName);
     }
 }
