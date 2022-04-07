@@ -7,12 +7,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -22,7 +19,7 @@ import android.widget.RatingBar;
 import android.widget.Toast;
 
 import com.example.seefood.R;
-import com.example.seefood.classes.Post;
+import com.example.seefood.models.Post;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -33,9 +30,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
-import java.io.IOException;
-import java.util.UUID;
 
 public class ComposeActivity extends AppCompatActivity {
 
@@ -126,8 +120,8 @@ public class ComposeActivity extends AppCompatActivity {
                             if(task.isSuccessful()){
 
                                 imageURL = task.getResult().toString();
-                                userID = currentUser.getUid();
                                 description = etDescription.getText().toString();
+                                userID = currentUser.getUid();
                                 composePost = new Post(description, imageURL, userRating, userID);
                                 updateUI(currentUser);
 

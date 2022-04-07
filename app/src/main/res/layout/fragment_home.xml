@@ -6,10 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".fragments.HomeFragment">
 
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvPosts"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="50dp"
+            tools:layout_editor_absoluteX="206dp"
+            tools:layout_editor_absoluteY="0dp">
+
+        </androidx.recyclerview.widget.RecyclerView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
     <ImageView
         android:id="@+id/ivlogOut"
-        android:layout_width="21dp"
-        android:layout_height="31dp"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:src="@drawable/ic_logout"
