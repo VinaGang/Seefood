@@ -8,4 +8,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="seefood_title_black">#2D3E9C</color>
+    <color name="seefood_blue">#A7C7E7</color>
 </resources>

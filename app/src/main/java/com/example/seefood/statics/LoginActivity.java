@@ -37,7 +37,6 @@ public class LoginActivity extends AppCompatActivity {
         tlTabs.addTab(tlTabs.newTab().setText("Log In"));
         tlTabs.addTab(tlTabs.newTab().setText("Sign Up"));
 
-
         vpViewPage.setAdapter(loginadapter);
         tlTabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
