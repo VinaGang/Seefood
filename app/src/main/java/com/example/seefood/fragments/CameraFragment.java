@@ -3,11 +3,14 @@ package com.example.seefood.fragments;
 import static android.app.Activity.RESULT_OK;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.ImageDecoder;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.activity.result.ActivityResultCallback;
@@ -49,10 +52,15 @@ import java.io.IOException;
 public class CameraFragment extends Fragment {
 
     private static final String TAG = "TestActivity";
+    static final int PICK_PHOTO_CODE  = 2;
 
+    //Ikemen Kuma
+    Button btUploadImage;
+    Bitmap selectedImage;
+    //Ikemen Kuma Cha nai
     //inputImage for ML Kit
     InputImage image;
-
+    ImageView ivSampleImage;
     //textview for result
     TextView tvResultText;
 
@@ -69,9 +77,21 @@ public class CameraFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_camera, container, false);
     }
 
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        if ((data != null) && requestCode == PICK_PHOTO_CODE) {
+            Uri photoUri = data.getData();
+            // Load the image located at photoUri into selectedImage
+            selectedImage = loadFromUri(photoUri);
+            //load to image
+            selectedImage= selectedImage.copy(Bitmap.Config.ARGB_8888, true);
+            Glide.with(getContext()).load(selectedImage).disallowHardwareConfig().into(ivSampleImage);
+//            Glide.with(getActivity()).load(photoUri).into(ivSampleImage);
+        }
+
         if(requestCode == 1){
 
             if(resultCode == RESULT_OK){
@@ -79,7 +99,9 @@ public class CameraFragment extends Fragment {
                 Log.i(TAG, "It went here");
                 Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
                 image = InputImage.fromBitmap(takenImage, 0);
-
+                //IKEMEN
+                Glide.with(getContext()).load(takenImage).disallowHardwareConfig().into(ivSampleImage);
+                //IKEMEN CHA NAI
                 //process the image
                 Task<Text> result =
                         recognizer.process(image)
@@ -112,7 +134,17 @@ public class CameraFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        //Ikemen Kuma
+        ivSampleImage = view.findViewById(R.id.ivSampleImage);
+        btUploadImage = view.findViewById(R.id.btUploadImage);
+        btUploadImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onPickPhoto(view);
+            }
+        });
 
+        //Ikemen Kuma Cha Nai
         //Retrieve Button
         Button imageBtn = view.findViewById(R.id.imageBtn),
                 camera = view.findViewById(R.id.camera);
@@ -120,8 +152,6 @@ public class CameraFragment extends Fragment {
         //Retrieve the textView for result
         tvResultText = view.findViewById(R.id.tvResultText);
 
-        //create a sample image here
-        ImageView ivSampleImage = view.findViewById(R.id.ivSampleImage);
 
         Glide.with(getContext())
                 .asBitmap()
@@ -172,12 +202,13 @@ public class CameraFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-
+                Log.d(TAG, "imageBtn Onclick");
                 //grab the bitmap and pass to the InputImage
                 Bitmap bitmap = ((BitmapDrawable) ivSampleImage.getDrawable()).getBitmap();
-
                 image = InputImage.fromBitmap(bitmap, 0);
-
+                //IKEMEN
+//                image = InputImage.fromBitmap(selectedImage, 0);
+                //IKEMEN CHA NAI
             }
         });
     }
@@ -212,4 +243,34 @@ public class CameraFragment extends Fragment {
         // Return the file target for the photo based on filename
         return new File(mediaStorageDir.getPath() + File.separator + fileName);
     }
+
+    //IKEMEN
+    public Bitmap loadFromUri(Uri photoUri) {
+        Bitmap image = null;
+        try {
+            // check version of Android on device
+            if(Build.VERSION.SDK_INT > 27){
+                // on newer versions of Android, use the new decodeBitmap method
+                ImageDecoder.Source source = ImageDecoder.createSource(getContext().getContentResolver(), photoUri);
+                image = ImageDecoder.decodeBitmap(source);
+            } else {
+                // support older versions of Android by using getBitmap
+                image = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), photoUri);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return image;
+    }
+
+    // Trigger gallery selection for a photo
+    public void onPickPhoto(View view) {
+        // Create intent for picking a photo from the gallery
+        Intent intent = new Intent(Intent.ACTION_PICK,
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+        // Bring up gallery to select a photo
+        startActivityForResult(intent, PICK_PHOTO_CODE);
+    }
+    //END IKEMEN
 }
