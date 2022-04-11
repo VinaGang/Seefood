@@ -65,9 +65,9 @@ public class CameraFragment extends Fragment {
         //create a sample image here
         ImageView ivSampleImage = view.findViewById(R.id.ivSampleImage);
 
-        Glide.with(getContext())
+/*        Glide.with(getContext())
                 .asBitmap()
-                .load("https://images.squarespace-cdn.com/content/v1/5cf4bd06f614ef00014ea1df/1617134060935-EP65IP6VQ9I6I8J702UN/codepath-1x1_solid-dark.png?format=500w")
+                .load("http://www.phocalillc.com/wp-content/uploads/2021/09/pho-cali-new-menu-11-2-2.jpg")
                 .into(new CustomTarget<Bitmap>() {
                     @Override
                     public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
@@ -78,7 +78,7 @@ public class CameraFragment extends Fragment {
                     public void onLoadCleared(@Nullable Drawable placeholder) {
 
                     }
-                });
+                });*/
 
         imageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
