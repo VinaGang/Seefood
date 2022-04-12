@@ -3,7 +3,6 @@ package com.example.seefood.fragments;
 import static android.app.Activity.RESULT_OK;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.ImageDecoder;
@@ -16,6 +15,7 @@ import android.os.Bundle;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.LongDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
@@ -34,18 +34,34 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.example.seefood.GoogleSearch;
 import com.example.seefood.R;
+import com.example.seefood.SerpApiSearchException;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.text.Text;
 import com.google.mlkit.vision.text.TextRecognition;
 import com.google.mlkit.vision.text.TextRecognizer;
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import cz.msebera.android.httpclient.Header;
 
 
 public class CameraFragment extends Fragment {
@@ -86,8 +102,35 @@ public class CameraFragment extends Fragment {
             // Load the image located at photoUri into selectedImage
             selectedImage = loadFromUri(photoUri);
             //load to image
-            selectedImage= selectedImage.copy(Bitmap.Config.ARGB_8888, true);
+            image = InputImage.fromBitmap(selectedImage, 0);
             Glide.with(getContext()).load(selectedImage).disallowHardwareConfig().into(ivSampleImage);
+            Task<Text> result =
+                    recognizer.process(image)
+                            .addOnSuccessListener(new OnSuccessListener<Text>() {
+                                @Override
+                                public void onSuccess(Text text) {
+
+                                    Log.i(TAG, "Firebase ML successfully detected text!");
+
+//                                    storeText(text);
+
+                                    for(Text.TextBlock block: text.getTextBlocks()){
+                                        Log.i(TAG, block.getText().toString());
+                                        String searchKey = "Pho Dac Biet";
+//                                        Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
+//                                        intent.putExtra(SearchManager.QUERY, searchKey);
+//                                        startActivity(intent);
+                                        search(searchKey);
+                                    }
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+
+                                    Log.e(TAG, "Unsuccessful");
+                                }});
+
 //            Glide.with(getActivity()).load(photoUri).into(ivSampleImage);
         }
 
@@ -127,6 +170,58 @@ public class CameraFragment extends Fragment {
             }
 
         }
+    }
+
+    private void search(String searchKey) {
+        String URL = "https://serpapi.com/search.json?google_domain=google.com";
+        AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams params = new RequestParams();
+        params.put("q", searchKey);
+        params.put("tbm", "isch");
+        params.put("ijn", "1");
+        params.put("api_key", "5869f12410008dd7dfe38ba1f1d683579d4303e0b21649270f3257f53532a0d8");
+        Log.d(TAG, "SerAPI: " + params);
+        client.get(URL, params, new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject responseBody) {
+                try {
+                  JSONArray images = responseBody.getJSONArray("images_results");
+//                    Log.d(TAG, "SerAPI: " + images);
+                    for(int i = 0; i <3; i++){
+                        Log.d(TAG, "SerAPI: " + images.getJSONObject(i).getString("original"));
+
+                    }
+                } catch (JSONException exception) {
+                    exception.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers,  Throwable error, JSONObject responseBody) {
+                Log.d(TAG, "SerAPI: " + responseBody);
+                Log.d(TAG, "SerAPI: " + String.valueOf(statusCode) + " " + error);
+            }
+        });
+//        // parameters
+//        Map<String, String> parameter = new HashMap<>();
+//        parameter.put("q", searchKey);
+//        parameter.put("api_key", GoogleSearch.SERP_API_KEY_NAME);
+////        parameter.put("tbm", "isch");
+////        parameter.put("ijn", 1);
+////        parameter.put("chips", searchKey);
+//        // Create search
+//        GoogleSearch search = new GoogleSearch(parameter);
+//
+//        try {
+//            // Execute search
+//            JsonObject data = search.getJson();
+//            Log.d(TAG, "SerAPI: " + data);
+//        } catch (SerpApiSearchException e) {
+//            System.out.println("oops exception detected!");
+//            e.printStackTrace();
+//        }
+
     }
 
     @Override
@@ -271,5 +366,6 @@ public class CameraFragment extends Fragment {
         // Bring up gallery to select a photo
         startActivityForResult(intent, PICK_PHOTO_CODE);
     }
+
     //END IKEMEN
 }
