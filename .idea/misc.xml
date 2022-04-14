@@ -27,6 +27,16 @@
         <entry key="..\:/Users/catuy/Projects/Seefood/app/src/main/res/layout/login_tab_fragment.xml" value="0.22" />
         <entry key="..\:/Users/catuy/Projects/Seefood/app/src/main/res/layout/signup_tab_fragment.xml" value="0.14666666666666667" />
         <entry key="..\:/Users/catuy/Projects/Seefood/app/src/main/res/menu/menu_bottom_navigation.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_cart_item.xml" value="0.10572916666666667" />
+        <entry key="app/src/main/res/layout/activity_compose.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.1693840579710145" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1693840579710145" />
+        <entry key="app/src/main/res/layout/cart_items.xml" value="0.19610507246376813" />
+        <entry key="app/src/main/res/layout/fragment_camera.xml" value="0.1693840579710145" />
+        <entry key="app/src/main/res/layout/fragment_cart.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/login_tab_fragment.xml" value="0.1693840579710145" />
+        <entry key="app/src/main/res/layout/signup_tab_fragment.xml" value="0.1693840579710145" />
       </map>
     </option>
   </component>
