@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -15,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import com.example.seefood.R;
 import com.example.seefood.adapters.PostsAdapter;
 import com.example.seefood.models.Post;
+import com.example.seefood.models.User;
 import com.example.seefood.statics.ComposeActivity;
 import com.example.seefood.statics.LoginActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -27,6 +29,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -45,14 +48,31 @@ public class HomeFragment extends Fragment {
     protected SwipeRefreshLayout swipeContainer;
     DatabaseReference postRef;
     FirebaseRecyclerOptions<Post> options;
+    private TextView tvgreetHeading;
+    private FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+    String userID = currentUser.getUid();
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         ivlogOut = view.findViewById(R.id.ivlogOut);
         fbtnCompose = view.findViewById(R.id.fbtnCompose);
         rvPosts = view.findViewById(R.id.rvPosts);
+        tvgreetHeading = view.findViewById(R.id.tvgreetHeading);
+
+        postRef = FirebaseDatabase.getInstance().getReference("user").child(userID);
+        postRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User user = snapshot.getValue(User.class);
+                tvgreetHeading.setText("Welcome, " + user.getUsername() + "!");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         swipeContainer = view.findViewById(R.id.swipeContainer);
 
