@@ -1,4 +1,4 @@
-package com.example.seefood.classes;
+package com.example.seefood.adapters;
 
 import android.content.Context;
 import android.util.Log;
@@ -13,15 +13,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.seefood.R;
+import com.example.seefood.models.CartItem;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
-public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
+public class CartAdapter extends FirebaseRecyclerAdapter<CartAdapter.ViewHolder> {
     Context context;
-    private List <CartItem> cartItems;
+    private FirebaseRecyclerOption <CartItem> cartItems;
 
-    public CartAdapter(Context context, List<CartItem> cartItems){
+    public CartAdapter(Context context, FirebaseRecyclerOption<CartItem> cartItems){
+        super(cartItems);
         this.context = context;
         this.cartItems = cartItems;
     }
@@ -42,12 +47,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             tvAmount = itemView.findViewById(R.id.tvAmount);;
             btnAdd = itemView.findViewById(R.id.btnAdd);;
             btnSub = itemView.findViewById(R.id.btnSub);;
-        }
-
-        public void bind(CartItem cartItem) {
-            //change later
-            tvFoodName.setText("Pho Cali");
-            tvPrice.setText("$100");
         }
     }
     @NonNull
