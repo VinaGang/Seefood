@@ -17,7 +17,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.seefood.statics.MainActivity;
 import com.example.seefood.R;
-import com.example.seefood.classes.User;
+import com.example.seefood.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -27,8 +27,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class SignupTabFragment extends Fragment {
-    public static final String LOGIN_KEY = "signup";
+    public static final String DEFAULT_PIC_URL = "https://firebasestorage.googleapis.com/v0/b/seefood-60e84.appspot.com/o/Profile%20Pics%2F447618cb49cf25bccc9ce1c252ca4c5a.jpg?alt=media&token=dd13d353-f9a3-4f18-b582-ee19e4b07cf5";
     private static final String TAG = "SignupTabFragment";
+
 
     private EditText etEmail;
     private EditText etNewUsername;
@@ -67,7 +68,6 @@ public class SignupTabFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 String email = etEmail.getText().toString();
-                String username = etNewUsername.getText().toString();
                 String password = etConfirmPassword.getText().toString();
                 if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
                     Toast.makeText(getContext(), "Email or password cannot be empty!", Toast.LENGTH_LONG).show();
@@ -78,7 +78,6 @@ public class SignupTabFragment extends Fragment {
                     return;
                 }
 
-                user = new User(email, password, username);
                 registerUser(email, password);
             }
         });
@@ -92,8 +91,9 @@ public class SignupTabFragment extends Fragment {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
+                            FirebaseUser curUser = mAuth.getCurrentUser();
+                            user = new User(email, password, etNewUsername.getText().toString(), DEFAULT_PIC_URL);
+                            updateUI(curUser);
                             getActivity().finish();
                         } else {
                             // If sign in fails, display a message to the user.
@@ -105,8 +105,8 @@ public class SignupTabFragment extends Fragment {
     }
 
     public void updateUI(FirebaseUser currentUser) {
-        String keyID = mDatabase.push().getKey();
-        mDatabase.child(keyID).setValue(user);
+        String userID = currentUser.getUid();
+        mDatabase.child(userID).setValue(user);
         Intent login = new Intent(getContext(), MainActivity.class);
         startActivity(login);
     }
