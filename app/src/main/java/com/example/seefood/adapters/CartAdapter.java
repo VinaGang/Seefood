@@ -12,20 +12,22 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.seefood.R;
 import com.example.seefood.models.CartItem;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 
 import java.util.List;
 
-public class CartAdapter extends FirebaseRecyclerAdapter<CartAdapter.ViewHolder> {
-    Context context;
-    private FirebaseRecyclerOption <CartItem> cartItems;
+public class CartAdapter extends FirebaseRecyclerAdapter<CartItem, CartAdapter.ViewHolder> {
+    private Context context;
+    private FirebaseRecyclerOptions<CartItem> cartItems;
 
-    public CartAdapter(Context context, FirebaseRecyclerOption<CartItem> cartItems){
+    public CartAdapter(Context context, FirebaseRecyclerOptions<CartItem> cartItems){
         super(cartItems);
         this.context = context;
         this.cartItems = cartItems;
@@ -58,14 +60,12 @@ public class CartAdapter extends FirebaseRecyclerAdapter<CartAdapter.ViewHolder>
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull CartItem cartItem) {
         Log.d("MovieAdapter", "onBindViewHolder" + position);
-        CartItem cartItem = cartItems.get(position);
-        holder.bind(cartItem);
+        Glide.with(context).load(cartItem.getFoodImagePath()).into(holder.ivFoodImage);
+        holder.tvFoodName.setText(cartItem.getFoodName());
+        holder.tvPrice.setText("$"+Float.toString(cartItem.getPrice()));
+        holder.tvAmount.setText(Integer.toString(cartItem.getAmount()));
     }
 
-    @Override
-    public int getItemCount() {
-        return cartItems.size();
-    }
 }

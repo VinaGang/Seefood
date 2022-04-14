@@ -12,13 +12,13 @@ import java.util.List;
 public class CartItem {
     String foodImagePath;
     String foodName;
-    String price;
-    String amount;
+    float price;
+    int amount;
 
 
     public CartItem(){};
 
-    public CartItem(String foodImagePath, String foodName, String price, String amount){
+    public CartItem(String foodImagePath, String foodName, float price, int amount){
         this.foodImagePath = foodImagePath;
         this.foodName = foodName;
         this.price = price;
@@ -33,11 +33,11 @@ public class CartItem {
         return foodName;
     }
 
-    public String getPrice(){
+    public float getPrice(){
         return price;
     }
 
-    public String getAmount(){
+    public int getAmount(){
         return amount;
     }
 }

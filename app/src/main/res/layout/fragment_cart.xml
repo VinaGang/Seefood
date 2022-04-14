@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="494dp" />
 
-    <EditText
+    <TextView
         android:id="@+id/tvTotal"
         android:layout_width="157dp"
         android:layout_height="wrap_content"
@@ -31,15 +31,16 @@
         android:layout_marginTop="20dp"
         android:text="Checkout"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="#FFFFFF"
         android:textSize="30dp" />
 
     <TextView
         android:id="@+id/tvTotalAmount"
-        android:layout_width="133dp"
-        android:layout_height="wrap_content"
+        android:layout_width="131dp"
+        android:layout_height="55dp"
         android:layout_below="@+id/rvCartItems"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="25dp"
+        android:layout_marginStart="27dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="56dp"
         android:layout_toEndOf="@+id/tvTotal"
