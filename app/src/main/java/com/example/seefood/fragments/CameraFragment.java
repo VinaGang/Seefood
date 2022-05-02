@@ -184,6 +184,10 @@ public class CameraFragment extends Fragment {
     private File getPhotoFileUri(String fileName) {
 
         File mediaStorageDir = new File(getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES), "SeeFood");
+
+        if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){
+            Log.d(TAG, "failed to create directory");
+        }
         File file = new File(mediaStorageDir.getPath() + File.separator + fileName);
 
         if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){
