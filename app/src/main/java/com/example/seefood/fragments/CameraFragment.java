@@ -183,6 +183,11 @@ public class CameraFragment extends Fragment {
 
         File mediaStorageDir = new File(getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES), "SeeFood");
         File file = new File(mediaStorageDir.getPath() + File.separator + fileName);
+
+        if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){
+            Log.d(TAG, "failed to create directory");
+        }
+
         return file;
     }
 
@@ -191,9 +196,8 @@ public class CameraFragment extends Fragment {
 
         Log.i(TAG, "request code is: " + requestCode);
         Log.i(TAG, "result code is: " + resultCode);
-
+        Log.d(TAG, "RESULT_OK = " + RESULT_OK);
         if(requestCode == 1 && resultCode == RESULT_OK){
-
             Log.i(TAG, "It went here");
             Bitmap imageBitmap = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
             Glide.with(getContext()).load(imageBitmap).into(ivImage);

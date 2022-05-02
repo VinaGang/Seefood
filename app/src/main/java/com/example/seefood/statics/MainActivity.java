@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if(mAuth.getCurrentUser() == null){
-            startActivity(new Intent(MainActivity.this, LoginTabFragment.class));
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
         }
     }
 }
