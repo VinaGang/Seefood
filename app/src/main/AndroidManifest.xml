@@ -38,7 +38,10 @@
             android:exported="false" />
         <activity
             android:name=".statics.MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:configChanges="orientation|screenSize">
+
+        </activity>
         <activity
             android:name=".statics.LoginActivity"
             android:exported="true"

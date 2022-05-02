@@ -58,6 +58,8 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-database:8.0.1'
     implementation 'com.google.firebase:firebase-database'
 
+    //noinspection GradleCompatible,GradleCompatible
+    implementation 'com.android.support:exifinterface:25.1.0'
 
     // FirebaseUI for Cloud Firestore
     implementation 'com.firebaseui:firebase-ui-firestore:8.0.1'
