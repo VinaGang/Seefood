@@ -1,10 +1,5 @@
 package com.example.seefood.fragments;
 
-import static android.app.Activity.RESULT_OK;
-
-import android.app.Activity;
-import android.content.ActivityNotFoundException;
-import android.content.Intent;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,19 +7,14 @@ import android.graphics.Matrix;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.FileProvider;
-import androidx.exifinterface.media.ExifInterface;
 import androidx.fragment.app.Fragment;
 
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -37,6 +27,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.canhub.cropper.CropImageContract;
+import com.canhub.cropper.CropImageContractOptions;
+import com.canhub.cropper.CropImageOptions;
+import com.canhub.cropper.CropImageView;
 
 import com.example.seefood.R;
 import com.example.seefood.models.SeeFoodMenu;
@@ -61,6 +55,7 @@ import java.util.List;
 public class CameraFragment extends Fragment {
 
     private static final String TAG = "CameraFragment";
+    private ActivityResultLauncher<CropImageContractOptions> cropImage;
 
     //inputImage for ML Kit
     InputImage image;
@@ -71,11 +66,15 @@ public class CameraFragment extends Fragment {
     //image
     ImageView ivImage;
 
-    File photoFile;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        cropImage = registerForActivityResult(new CropImageContract(), result -> {
+            if(result.isSuccessful()){
+                Glide.with(getContext()).load(result.getUriContent()).into(ivImage);
+            }
+        });
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_camera, container, false);
     }
@@ -83,6 +82,7 @@ public class CameraFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         setHasOptionsMenu(true);
 
         //Retrieve Toolbar
@@ -104,7 +104,6 @@ public class CameraFragment extends Fragment {
 
             //grab the bitmap and pass to the InputImage
             Bitmap bitmap = ((BitmapDrawable) ivImage.getDrawable()).getBitmap();
-
             image = InputImage.fromBitmap(bitmap, 0);
 
             //process the image
@@ -130,81 +129,34 @@ public class CameraFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        takePicture();
+        CropImageContractOptions options = new CropImageContractOptions(null, new CropImageOptions())
+                .setCropShape(CropImageView.CropShape.RECTANGLE)
+                .setCropMenuCropButtonIcon(R.drawable.ic_photo_camera)
+                .setGuidelines(CropImageView.Guidelines.ON);
+
+        cropImage.launch(options);
 
         return true;
     }
 
-    public void takePicture(){
+    private void storeText(Text text) {
 
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        photoFile = getPhotoFileUri("photo.jpg");
+        //Create a StringBuilder to store the text
+        StringBuilder stringBuilder = new StringBuilder();
 
-        Uri fileProvider = FileProvider.getUriForFile(getActivity(), "com.example.android.seefood", photoFile);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
-
-        if(intent.resolveActivity(getActivity().getPackageManager()) != null){
-
-            Log.i(TAG, "It went here at start");
-            startActivityForResult(intent, 1);
+        //append each block in the StringBuilder
+        for(Text.TextBlock block: text.getTextBlocks()){
+            stringBuilder.append(block.getText()).append("\n");
         }
 
-    }
+        Log.i(TAG, "the text is: " + stringBuilder);
 
-    private File getPhotoFileUri(String fileName) {
-
-        File mediaStorageDir = new File(getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES), "SeeFood");
-
-        if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){
-            Log.d(TAG, "failed to create directory");
+        if(stringBuilder.length() == 0){
+            tvResultText.setText("The image does not have text");
         }
-        File file = new File(mediaStorageDir.getPath() + File.separator + fileName);
-
-        if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){
-            Log.d(TAG, "failed to create directory");
+        else {
+            //set the text to the textview
+            tvResultText.setText(stringBuilder.toString());
         }
-
-        return file;
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-
-        Log.i(TAG, "request code is: " + requestCode);
-        Log.i(TAG, "result code is: " + resultCode);
-        Log.d(TAG, "RESULT_OK = " + RESULT_OK);
-        if(requestCode == 1 && resultCode == RESULT_OK){
-            Log.i(TAG, "It went here");
-            Bitmap imageBitmap = rotateBitmapOrientation(photoFile.getAbsolutePath());
-            Glide.with(getContext()).load(imageBitmap).into(ivImage);
-
-        }
-    }
-    public Bitmap rotateBitmapOrientation(String photoFilePath) {
-        // Create and configure BitmapFactory
-        BitmapFactory.Options bounds = new BitmapFactory.Options();
-        bounds.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(photoFilePath, bounds);
-        BitmapFactory.Options opts = new BitmapFactory.Options();
-        Bitmap bm = BitmapFactory.decodeFile(photoFilePath, opts);
-        // Read EXIF Data
-        ExifInterface exif = null;
-        try {
-            exif = new ExifInterface(photoFilePath);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        String orientString = exif.getAttribute(ExifInterface.TAG_ORIENTATION);
-        int orientation = orientString != null ? Integer.parseInt(orientString) : ExifInterface.ORIENTATION_NORMAL;
-        int rotationAngle = 0;
-        if (orientation == ExifInterface.ORIENTATION_ROTATE_90) rotationAngle = 90;
-        if (orientation == ExifInterface.ORIENTATION_ROTATE_180) rotationAngle = 180;
-        if (orientation == ExifInterface.ORIENTATION_ROTATE_270) rotationAngle = 270;
-        // Rotate Bitmap
-        Matrix matrix = new Matrix();
-        matrix.setRotate(rotationAngle, (float) bm.getWidth() / 2, (float) bm.getHeight() / 2);
-        Bitmap rotatedBitmap = Bitmap.createBitmap(bm, 0, 0, bounds.outWidth, bounds.outHeight, matrix, true);
-        // Return result
-        return rotatedBitmap;
     }
 }
