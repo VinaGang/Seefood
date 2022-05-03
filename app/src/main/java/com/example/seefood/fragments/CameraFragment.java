@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.Point;
+import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -35,11 +37,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.CustomTarget;
-import com.bumptech.glide.request.transition.Transition;
+
 import com.example.seefood.R;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.example.seefood.models.SeeFoodMenu;
+import com.example.seefood.statics.CreateMenuActivity;
 import com.google.android.gms.tasks.Task;
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.text.Text;
@@ -47,10 +48,14 @@ import com.google.mlkit.vision.text.TextRecognition;
 import com.google.mlkit.vision.text.TextRecognizer;
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
 
+import org.parceler.Parcels;
+
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 
 public class CameraFragment extends Fragment {
@@ -95,21 +100,6 @@ public class CameraFragment extends Fragment {
         //create a sample image here
         ivImage = view.findViewById(R.id.ivSampleImage);
 
-/*        Glide.with(getContext())
-                .asBitmap()
-                .load("http://www.phocalillc.com/wp-content/uploads/2021/09/pho-cali-new-menu-11-2-2.jpg")
-                .into(new CustomTarget<Bitmap>() {
-                    @Override
-                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                        ivSampleImage.setImageBitmap(resource);
-                    }
-
-                    @Override
-                    public void onLoadCleared(@Nullable Drawable placeholder) {
-
-                    }
-                });*/
-
         imageBtn.setOnClickListener(v -> {
 
             //grab the bitmap and pass to the InputImage
@@ -121,10 +111,11 @@ public class CameraFragment extends Fragment {
             Task<Text> result =
                     recognizer.process(image)
                             .addOnSuccessListener(text -> {
-
-                                Log.i(TAG, "Firebase ML successfully processed image.");
-                                storeText(text);
-
+                                //Intent to create Menu Activity
+                                SeeFoodMenu menu = new SeeFoodMenu(text);
+                                Intent intent = new Intent(getContext(), CreateMenuActivity.class);
+                                intent.putExtra("menu", Parcels.wrap(menu));
+                                startActivity(intent);
                             })
                             .addOnFailureListener(e -> Log.e(TAG, "Unsuccessful"));
         });
@@ -142,27 +133,6 @@ public class CameraFragment extends Fragment {
         takePicture();
 
         return true;
-    }
-
-    private void storeText(Text text) {
-
-        //Create a StringBuilder to store the text
-        StringBuilder stringBuilder = new StringBuilder();
-
-        //append each block in the StringBuilder
-        for(Text.TextBlock block: text.getTextBlocks()){
-            stringBuilder.append(block.getText()).append("\n");
-        }
-
-        Log.i(TAG, "the text is: " + stringBuilder);
-
-        if(stringBuilder.length() == 0){
-            tvResultText.setText("The image does not have text");
-        }
-        else {
-            //set the text to the textview
-            tvResultText.setText(stringBuilder.toString());
-        }
     }
 
     public void takePicture(){
