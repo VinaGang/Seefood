@@ -2,6 +2,10 @@ package com.example.seefood.fragments;
 
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.graphics.Point;
+import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
@@ -27,7 +31,10 @@ import com.canhub.cropper.CropImageContract;
 import com.canhub.cropper.CropImageContractOptions;
 import com.canhub.cropper.CropImageOptions;
 import com.canhub.cropper.CropImageView;
+
 import com.example.seefood.R;
+import com.example.seefood.models.SeeFoodMenu;
+import com.example.seefood.statics.CreateMenuActivity;
 import com.google.android.gms.tasks.Task;
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.text.Text;
@@ -35,10 +42,19 @@ import com.google.mlkit.vision.text.TextRecognition;
 import com.google.mlkit.vision.text.TextRecognizer;
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
 
+import org.parceler.Parcels;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+
 public class CameraFragment extends Fragment {
 
     private static final String TAG = "CameraFragment";
-
     private ActivityResultLauncher<CropImageContractOptions> cropImage;
 
     //inputImage for ML Kit
@@ -57,7 +73,6 @@ public class CameraFragment extends Fragment {
         cropImage = registerForActivityResult(new CropImageContract(), result -> {
             if(result.isSuccessful()){
                 Glide.with(getContext()).load(result.getUriContent()).into(ivImage);
-
             }
         });
         // Inflate the layout for this fragment
@@ -95,10 +110,11 @@ public class CameraFragment extends Fragment {
             Task<Text> result =
                     recognizer.process(image)
                             .addOnSuccessListener(text -> {
-
-                                Log.i(TAG, "Firebase ML successfully processed image.");
-                                storeText(text);
-
+                                //Intent to create Menu Activity
+                                SeeFoodMenu menu = new SeeFoodMenu(text);
+                                Intent intent = new Intent(getContext(), CreateMenuActivity.class);
+                                intent.putExtra("menu", Parcels.wrap(menu));
+                                startActivity(intent);
                             })
                             .addOnFailureListener(e -> Log.e(TAG, "Unsuccessful"));
         });
@@ -143,5 +159,4 @@ public class CameraFragment extends Fragment {
             tvResultText.setText(stringBuilder.toString());
         }
     }
-
 }

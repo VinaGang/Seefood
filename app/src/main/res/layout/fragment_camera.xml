@@ -46,7 +46,7 @@
             app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tbCamera"
-            app:srcCompat="@drawable/menu" />
+            app:srcCompat="@drawable/menu_2" />
 
         <TextView
             android:id="@+id/tvResultText"
