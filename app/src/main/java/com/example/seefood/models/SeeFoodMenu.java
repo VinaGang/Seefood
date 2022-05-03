@@ -16,6 +16,7 @@ import java.util.List;
 public class SeeFoodMenu {
     public static final String TAG = "Menu Class";
     List<List<String>> menu;
+    public static final int MARGIN_ERROR = 17;
     public SeeFoodMenu(Text result){
         menu = getMenu(result);
     }
@@ -36,11 +37,12 @@ public class SeeFoodMenu {
         for (Text.TextBlock block : result.getTextBlocks()) {
             for (Text.Line line : block.getLines()) {
                 Point[] lineCornerPoints = line.getCornerPoints();
+                Log.d(TAG, line.getText() + ": " + lineCornerPoints[0].x);
                 if(pos.size() == 0) {
                     pos.add(lineCornerPoints[0].x);
                 }else {
                     //if not in list [15, 12]
-                    if(!isInPositionsList(lineCornerPoints[0].x, pos, 1)){
+                    if(!isInPositionsList(lineCornerPoints[0].x, pos, MARGIN_ERROR)){
                         pos.add(lineCornerPoints[0].x);
                     }
                 }
@@ -61,8 +63,7 @@ public class SeeFoodMenu {
                 String lineText = line.getText();
                 Point[] lineCornerPoints = line.getCornerPoints();
                 for(int j=0; j<pos.size(); j++){
-
-                    if(isPrecise(lineCornerPoints[0].x, pos.get(j), 1)){
+                    if(isPrecise(lineCornerPoints[0].x, pos.get(j), MARGIN_ERROR)){
                         items.get(j).add(lineText.substring(0, lineText.length()>40?40:lineText.length()));
                         break;
                     }
@@ -82,17 +83,14 @@ public class SeeFoodMenu {
         };
 
         Collections.sort(items, stringLengthComparator);
+        for(int i=0; i< 3; i++){
+            Log.d(TAG, items.get(i).toString());
+        }
+
         for(int i= items.size() - 1; i>=3 ; i--) {
             items.remove(i);
         }
         //This is how to use it:
-//        for(int i=0; i<items.get(2).size()-1; i++){
-//            //items.get(0) is food names or descriptions
-//            //items.get(1) is descriptions or food names
-//            //items.get(0) is prices
-//            Log.d(TAG, items.get(0).get(i) + "\t\t\t" + items.get(2).get(i));
-//            Log.d(TAG, items.get(1).get(i));
-//        }
 
         return items;
     }
