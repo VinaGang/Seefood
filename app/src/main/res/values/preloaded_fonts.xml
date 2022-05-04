@@ -3,6 +3,8 @@
     <array name="preloaded_fonts" translatable="false">
         <item>@font/amatica_sc_bold</item>
         <item>@font/atma</item>
+        <item>@font/bai_jamjuree_medium</item>
         <item>@font/caveat</item>
+        <item>@font/francois_one</item>
     </array>
 </resources>
