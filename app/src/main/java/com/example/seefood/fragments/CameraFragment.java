@@ -133,6 +133,7 @@ public class CameraFragment extends Fragment {
         CropImageContractOptions options = new CropImageContractOptions(null, new CropImageOptions())
                 .setCropShape(CropImageView.CropShape.RECTANGLE)
                 .setCropMenuCropButtonIcon(R.drawable.ic_photo_camera)
+                .setOutputCompressQuality(100)
                 .setGuidelines(CropImageView.Guidelines.ON);
 
         cropImage.launch(options);
