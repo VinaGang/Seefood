@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.seefood.R;
-import com.example.seefood.models.SeeFoodMenu;
 import com.example.seefood.models.SeeFoodMenu_Copy;
 
 import androidx.annotation.NonNull;
@@ -15,11 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder> {
+public class CreateMenuAdapter extends RecyclerView.Adapter<CreateMenuAdapter.MenuViewHolder> {
 
     private final Context context;
     private SeeFoodMenu_Copy menu;
-    public MenuAdapter(Context context, SeeFoodMenu_Copy menu) {
+    public CreateMenuAdapter(Context context, SeeFoodMenu_Copy menu) {
         this.context = context;
         this.menu = menu;
     }
@@ -31,17 +30,17 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
 
     @NonNull
     @Override
-    public MenuAdapter.MenuViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CreateMenuAdapter.MenuViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         // Inflate the custom layout
         View contactView = inflater.inflate(R.layout.item_menu, parent, false);
         // Return a new holder instance
-        return new MenuAdapter.MenuViewHolder(contactView);
+        return new CreateMenuAdapter.MenuViewHolder(contactView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MenuAdapter.MenuViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CreateMenuAdapter.MenuViewHolder holder, int position) {
         List<List<String>> menuList = menu.getMenu();
         holder.bind(menuList, position);
     }
