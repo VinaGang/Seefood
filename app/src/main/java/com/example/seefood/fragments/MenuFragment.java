@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.seefood.R;
 import com.example.seefood.adapters.MenuAdapter;
 import com.example.seefood.models.SeeFoodMenu;
+import com.example.seefood.models.SeeFoodMenu_Copy;
 
 import org.parceler.Parcels;
 
@@ -22,7 +23,7 @@ public class MenuFragment extends Fragment {
     public static final String TAG = "MenuFragment";
     private MenuAdapter menuAdapter;
     private RecyclerView rvMenu;
-    SeeFoodMenu seeFoodMenu;
+    SeeFoodMenu_Copy seeFoodMenu;
     private Toolbar tbFragMenu;
 
     @Override
@@ -32,7 +33,7 @@ public class MenuFragment extends Fragment {
         ((AppCompatActivity) getActivity()).setSupportActionBar(tbFragMenu);
 
 //        Intent i = view.getIntent();
-        seeFoodMenu = new SeeFoodMenu();
+        seeFoodMenu = new SeeFoodMenu_Copy();
         menuAdapter = new MenuAdapter(getContext(), seeFoodMenu);
         rvMenu.setAdapter(menuAdapter);
         rvMenu.setLayoutManager(new LinearLayoutManager(getContext()));

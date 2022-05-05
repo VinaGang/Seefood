@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.example.seefood.R;
 import com.example.seefood.models.SeeFoodMenu;
+import com.example.seefood.models.SeeFoodMenu_Copy;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,13 +18,13 @@ import java.util.List;
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder> {
 
     private final Context context;
-    private SeeFoodMenu menu;
-    public MenuAdapter(Context context, SeeFoodMenu menu) {
+    private SeeFoodMenu_Copy menu;
+    public MenuAdapter(Context context, SeeFoodMenu_Copy menu) {
         this.context = context;
         this.menu = menu;
     }
 
-    public void addAll(SeeFoodMenu menu){
+    public void addAll(SeeFoodMenu_Copy menu){
         this.menu = menu;
         notifyDataSetChanged();
     }
@@ -48,7 +49,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
     @Override
     public int getItemCount() {
         if(menu == null || menu.getMenu() == null || menu.getMenu().isEmpty()) return 0;
-        return menu.getMenu().get(2).size();
+        return menu.getMenu().get(1).size();
     }
 
     public class MenuViewHolder extends RecyclerView.ViewHolder {
@@ -62,8 +63,26 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
         }
 
         public void bind(List<List<String>> menuList, int position) {
-            tvNameDes.setText(menuList.get(0).get(position) +"\n"+ menuList.get(1).get(position));
-            tvPrice.setText(menuList.get(2).get(position));
+            String name;
+            String des;
+            String price;
+            if(position >= menuList.get(0).size()) {
+                name = "unknown";
+            }else{
+                name = menuList.get(0).get(position);
+            }
+            if(position >= menuList.get(1).size()) {
+                price = "unknown";
+            }else{
+                price = menuList.get(1).get(position);
+            }
+//            if(position >= menuList.get(2).size()) {
+//                price = "NA";
+//            }else{
+//                price = menuList.get(2).get(position);
+//            }
+            tvNameDes.setText(name);
+            tvPrice.setText(price);
         }
 
     }
