@@ -42,7 +42,6 @@ import com.canhub.cropper.CropImageOptions;
 import com.canhub.cropper.CropImageView;
 
 import com.example.seefood.R;
-import com.example.seefood.models.SeeFoodMenu;
 import com.example.seefood.models.SeeFoodMenu_Copy;
 import com.example.seefood.statics.CreateMenuActivity;
 import com.google.android.gms.tasks.Task;
@@ -146,7 +145,8 @@ public class CameraFragment extends Fragment {
                     recognizer.process(image)
                             .addOnSuccessListener(text -> {
                                 //Intent to create Menu Activity
-                                SeeFoodMenu_Copy menu = new SeeFoodMenu_Copy(text);
+                                SeeFoodMenu_Copy menu = new SeeFoodMenu_Copy(text); //Already have list of Pictures
+                                Log.d(TAG, menu.getMenuItemsList().toString());
                                 Intent intent = new Intent(getContext(), CreateMenuActivity.class);
                                 intent.putExtra("menu", Parcels.wrap(menu));
 

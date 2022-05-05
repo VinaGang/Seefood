@@ -68,7 +68,8 @@ public class ComposeActivity extends AppCompatActivity {
         currentUser = mAuth.getCurrentUser();
 
         //get data of current user
-        userDatabaseReference = firebaseDatabase.getReference("user").child(currentUser.getUid());
+        userID = currentUser.getUid();
+        userDatabaseReference = firebaseDatabase.getReference("user").child(userID);
 
         userDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -117,14 +118,14 @@ public class ComposeActivity extends AppCompatActivity {
                 uploadToFirebase(foodPicUri);
 
             }
+
         });
     }
 
     public void updateUI() {
-        String keyID = databaseReference.push().getKey();
-        databaseReference.child(keyID).setValue(composePost);
-        Intent login = new Intent(this, MainActivity.class);
-        startActivity(login);
+        String postID = databaseReference.push().getKey();
+        databaseReference.child(postID).setValue(composePost);
+        finish();
     }
 
     private void uploadToFirebase(Uri imageUri){
@@ -141,10 +142,11 @@ public class ComposeActivity extends AppCompatActivity {
 
                                 imageURL = task.getResult().toString();
                                 description = etDescription.getText().toString();
-                                composePost = new Post(description, imageURL, userRating, curUser);
+                                userID = currentUser.getUid();
+                                composePost = new Post(description, imageURL, userRating, userID, curUser);
                                 updateUI();
 
-                                if(description == null){
+                                if(description == null) {
                                     Toast.makeText(ComposeActivity.this, "Description cannot be empty!", Toast.LENGTH_SHORT).show();
                                     return;
                                 }

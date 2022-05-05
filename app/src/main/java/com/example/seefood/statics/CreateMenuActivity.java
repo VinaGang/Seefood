@@ -16,9 +16,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.seefood.R;
-import com.example.seefood.adapters.MenuAdapter;
 import com.example.seefood.models.Food;
 import com.example.seefood.models.RestoMenu;
+import com.example.seefood.adapters.CreateMenuAdapter;
 import com.example.seefood.models.SeeFoodMenu_Copy;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -32,22 +32,25 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+
 public class CreateMenuActivity extends AppCompatActivity {
 
     public static final String TAG = "CreateMenuActivity";
-    private MenuAdapter menuAdapter;
+    private CreateMenuAdapter menuAdapter;
     private RecyclerView rvMenu;
     SeeFoodMenu_Copy seeFoodMenu;
     private Toolbar tbCreateMenu;
     private DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference("menu");
     private EditText menuTitle;
     List<String> foodName, foodPrice;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_menu);
         rvMenu = findViewById(R.id.rvMenu);
-        tbCreateMenu = findViewById(R.id.tbSavedMenu);
+        tbCreateMenu = findViewById(R.id.tbCreateMenu);
         setSupportActionBar(tbCreateMenu);
         tbCreateMenu.setNavigationOnClickListener(view -> {
             finish();
@@ -55,7 +58,7 @@ public class CreateMenuActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         seeFoodMenu = new SeeFoodMenu_Copy();
-        menuAdapter = new MenuAdapter(this, seeFoodMenu);
+        menuAdapter = new CreateMenuAdapter(this, seeFoodMenu);
         rvMenu.setAdapter(menuAdapter);
         rvMenu.setLayoutManager(new LinearLayoutManager(this));
         seeFoodMenu = (SeeFoodMenu_Copy) Parcels.unwrap(i.getParcelableExtra("menu"));
@@ -108,10 +111,14 @@ public class CreateMenuActivity extends AppCompatActivity {
                     firebaseDatabase.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(menuTitle.getText().toString()).setValue(menu)
                             .addOnSuccessListener(unused -> Log.i(TAG, "Menu posted!"))
                             .addOnFailureListener(e -> Log.i(TAG, "Menu not posted"));
-                    Intent intent = new Intent();
-                    setResult(RESULT_OK, intent);
-                    finish();
+                    //Intent intent = new Intent();
+                    //setResult(RESULT_OK, intent);
+                    //finish();
                 }
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.putExtra("menu", Parcels.wrap(seeFoodMenu.getMenuItemsList()));
+                intent.putExtra("frag_request", MainActivity.MENU_FRAG_REQUEST);
+                startActivity(intent);
                 break;
             default:
                 return super.onOptionsItemSelected(item);

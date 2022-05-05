@@ -79,4 +79,5 @@ dependencies {
 
     implementation 'com.airbnb.android:lottie:5.0.3'
 
+    implementation 'com.loopj.android:android-async-http:1.4.11'
 }

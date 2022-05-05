@@ -1,6 +1,5 @@
 package com.example.seefood.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,22 +10,15 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.example.seefood.R;
-import com.example.seefood.adapters.MenuAdapter;
-import com.example.seefood.adapters.PostsAdapter;
 import com.example.seefood.adapters.SavedMenuAdapter;
-import com.example.seefood.models.Post;
 import com.example.seefood.models.RestoMenu;
 import com.example.seefood.models.SeeFoodMenu;
-import com.example.seefood.models.SeeFoodMenu_Copy;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import org.parceler.Parcels;
 
 public class MenuFragment2 extends Fragment {
 
@@ -63,7 +55,7 @@ public class MenuFragment2 extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_menu, container, false);
+        return inflater.inflate(R.layout.fragment_menu2, container, false);
     }
 
     @Override
