@@ -48,7 +48,10 @@
         <entry key="app/src/main/res/layout/fragment_camera.xml" value="0.1693840579710145" />
         <entry key="app/src/main/res/layout/fragment_cart.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_menu.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_review.xml" value="0.1" />
         <entry key="app/src/main/res/layout/login_tab_fragment.xml" value="0.1693840579710145" />
+        <entry key="app/src/main/res/layout/menu_items.xml" value="0.25831298828125" />
         <entry key="app/src/main/res/layout/signup_tab_fragment.xml" value="0.1693840579710145" />
         <entry key="app/src/main/res/menu/menu_bottom_navigation.xml" value="0.1" />
       </map>
