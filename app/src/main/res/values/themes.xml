@@ -2,10 +2,11 @@
     <!-- Base application theme. -->
     <style name="Theme.Seefood" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#A7C7E7</item>
-        <item name="colorPrimaryDark">#88aed0</item>
+        <item name="colorPrimary">@color/seefood_theme_dark</item>
+        <item name="colorPrimaryDark">@color/seefood_theme_dark</item>
         <item name="colorOnPrimary">#a7c7e7</item>
         <item name="colorAccent">#92b1b6</item>
         <!-- Customize your theme here. -->
+        <item name="android:windowContentTransitions">true</item>
     </style>
 </resources>
