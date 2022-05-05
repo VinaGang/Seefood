@@ -15,6 +15,7 @@ import com.example.seefood.fragments.CameraFragment;
 import com.example.seefood.fragments.CartFragment;
 import com.example.seefood.fragments.HomeFragment;
 import com.example.seefood.fragments.LoginTabFragment;
+import com.example.seefood.fragments.MenuFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Begin the transaction
     final FragmentManager fragmentManager = getSupportFragmentManager();
+    public static final int FRAG_REQUEST = 1;
     private BottomNavigationView bottomNavigationView;
     private FirebaseAuth mAuth;
 
@@ -42,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.action_camera:
                     fragment = new CameraFragment();
+                    break;
+                case R.id.action_seefoodMenu:
+                    fragment = new MenuFragment();
                     break;
                 case R.id.action_cart:
                 default:
@@ -66,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if(mAuth.getCurrentUser() == null){
-            startActivity(new Intent(MainActivity.this, LoginTabFragment.class));
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
         }
     }
 }

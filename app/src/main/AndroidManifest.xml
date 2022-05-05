@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.seefood">
+  
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" />
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -12,11 +22,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Seefood">
         <activity
+            android:name=".statics.CreateMenuActivity"
+            android:exported="false" />
+
+        <activity android:name="com.canhub.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat"/>
+
+        <activity
             android:name=".statics.ComposeActivity"
             android:exported="false" />
         <activity
             android:name=".statics.MainActivity"
+            android:configChanges="orientation|screenSize"
             android:exported="false" />
+      
         <activity
             android:name=".statics.LoginActivity"
             android:exported="true"
