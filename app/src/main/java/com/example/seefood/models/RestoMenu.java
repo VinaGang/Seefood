@@ -1,8 +1,11 @@
 package com.example.seefood.models;
 
+import android.os.Parcelable;
+
+import java.io.Serializable;
 import java.util.List;
 
-public class RestoMenu {
+public class RestoMenu implements Serializable {
 
     public String name;
     public List<Food> items;

@@ -27,23 +27,29 @@
         <entry key="..\:/Users/catuy/Projects/Seefood/app/src/main/res/menu/menu_bottom_navigation.xml" value="0.22" />
         <entry key="..\:/Vernon/Seefood/app/src/main/res/drawable/box.xml" value="0.2825" />
         <entry key="..\:/Vernon/Seefood/app/src/main/res/drawable/gradient_bg.xml" value="0.277" />
+        <entry key="..\:/Vernon/Seefood/app/src/main/res/drawable/gradient_bg2.xml" value="0.1795" />
         <entry key="..\:/Vernon/Seefood/app/src/main/res/drawable/ic_photo_camera.xml" value="0.1795" />
         <entry key="..\:/Vernon/Seefood/app/src/main/res/drawable/ic_photo_camera_selected.xml" value="0.1795" />
         <entry key="..\:/Vernon/Seefood/app/src/main/res/drawable/login_bg.xml" value="0.178" />
+        <entry key="..\:/Vernon/Seefood/app/src/main/res/layout/activity_compose.xml" value="0.14766970618034447" />
         <entry key="..\:/Vernon/Seefood/app/src/main/res/layout/activity_create_menu.xml" value="0.2" />
         <entry key="..\:/Vernon/Seefood/app/src/main/res/layout/activity_cropper.xml" value="0.1" />
         <entry key="..\:/Vernon/Seefood/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Vernon/Seefood/app/src/main/res/layout/activity_main.xml" value="0.17074275362318841" />
         <entry key="..\:/Vernon/Seefood/app/src/main/res/layout/fragment_camera.xml" value="0.264" />
+        <entry key="..\:/Vernon/Seefood/app/src/main/res/layout/fragment_cart.xml" value="0.14766970618034447" />
         <entry key="..\:/Vernon/Seefood/app/src/main/res/layout/fragment_home.xml" value="0.278125" />
         <entry key="..\:/Vernon/Seefood/app/src/main/res/layout/fragment_menu.xml" value="0.278125" />
+        <entry key="..\:/Vernon/Seefood/app/src/main/res/layout/fragment_saved_menu_detail.xml" value="0.14766970618034447" />
         <entry key="..\:/Vernon/Seefood/app/src/main/res/layout/fragment_success.xml" value="0.264" />
         <entry key="..\:/Vernon/Seefood/app/src/main/res/layout/item_menu.xml" value="0.176" />
+        <entry key="..\:/Vernon/Seefood/app/src/main/res/layout/item_saved_menu.xml" value="0.4" />
         <entry key="..\:/Vernon/Seefood/app/src/main/res/layout/login_tab_fragment.xml" value="0.25677083333333334" />
         <entry key="..\:/Vernon/Seefood/app/src/main/res/layout/signup_tab_fragment.xml" value="0.25677083333333334" />
         <entry key="..\:/Vernon/Seefood/app/src/main/res/menu/camera_toolbar_menu.xml" value="0.25677083333333334" />
         <entry key="..\:/Vernon/Seefood/app/src/main/res/menu/create_menu_menu.xml" value="0.19722222222222222" />
         <entry key="..\:/Vernon/Seefood/app/src/main/res/menu/menu_bottom_navigation.xml" value="0.25677083333333334" />
+        <entry key="..\:/Vernon/Seefood/app/src/main/res/menu/saved_menu.xml" value="0.19722222222222222" />
         <entry key="..\:/Vernon/Seefood/app/src/main/res/xml/fileprovider.xml" value="0.17074275362318841" />
       </map>
     </option>

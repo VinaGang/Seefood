@@ -2,8 +2,6 @@ package com.example.seefood.statics;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -14,11 +12,9 @@ import com.example.seefood.R;
 import com.example.seefood.fragments.CameraFragment;
 import com.example.seefood.fragments.CartFragment;
 import com.example.seefood.fragments.HomeFragment;
-import com.example.seefood.fragments.LoginTabFragment;
-import com.example.seefood.fragments.MenuFragment;
+import com.example.seefood.fragments.MenuFragment2;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
                     fragment = new CameraFragment();
                     break;
                 case R.id.action_seefoodMenu:
-                    fragment = new MenuFragment();
+                    fragment = new MenuFragment2();
                     break;
                 case R.id.action_cart:
                 default:
