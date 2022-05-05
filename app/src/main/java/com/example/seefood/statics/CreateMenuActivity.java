@@ -15,9 +15,13 @@ import android.view.MenuItem;
 
 import com.example.seefood.R;
 import com.example.seefood.adapters.CreateMenuAdapter;
+import com.example.seefood.fragments.MenuFragment;
 import com.example.seefood.models.SeeFoodMenu_Copy;
 
 import org.parceler.Parcels;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CreateMenuActivity extends AppCompatActivity {
 
@@ -26,6 +30,7 @@ public class CreateMenuActivity extends AppCompatActivity {
     private RecyclerView rvMenu;
     SeeFoodMenu_Copy seeFoodMenu;
     private Toolbar tbCreateMenu;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +63,10 @@ public class CreateMenuActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.actionSaveMenu:
                 Log.d(TAG, "actionSaveMenu");
-                finish();
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.putExtra("menu", Parcels.wrap(seeFoodMenu.getMenuItemsList()));
+                intent.putExtra("frag_request", MainActivity.MENU_FRAG_REQUEST);
+                startActivity(intent);
                 break;
             default:
                 return super.onOptionsItemSelected(item);
