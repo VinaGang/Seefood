@@ -1,10 +1,7 @@
 package com.example.seefood.fragments;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.transition.Transition;
-import android.transition.TransitionInflater;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,11 +21,9 @@ import com.example.seefood.models.Post;
 import com.example.seefood.models.User;
 import com.example.seefood.statics.ComposeActivity;
 import com.example.seefood.statics.LoginActivity;
-import com.example.seefood.statics.MainActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -126,7 +121,6 @@ public class HomeFragment extends Fragment {
                 android.R.color.holo_red_light);
 
         postRef = FirebaseDatabase.getInstance().getReference("post");
-
         options = new FirebaseRecyclerOptions.Builder<Post>()
                 .setQuery(postRef, Post.class)
                 .build();

@@ -1,7 +1,6 @@
 package com.example.seefood.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,19 +9,22 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.seefood.R;
+import com.example.seefood.fragments.SinglePostFragment;
+import com.example.seefood.fragments.UserFragment;
 import com.example.seefood.models.Post;
 import com.example.seefood.models.User;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -46,10 +48,10 @@ public class PostsAdapter extends FirebaseRecyclerAdapter<Post, PostsAdapter.Vie
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Post post) {
+    protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Post posts) {
 
-        String imageURL = post.getImageURL();
-        User user = post.getUser();
+        String imageURL = posts.getImageURL();
+        User user = posts.getUser();
 
         if(user != null){
             holder.tvUsername.setText(user.getUsername());
@@ -57,8 +59,17 @@ public class PostsAdapter extends FirebaseRecyclerAdapter<Post, PostsAdapter.Vie
         }
         
         Glide.with(context).load(imageURL).into(holder.ivImage);
-        holder.rbRatingReview.setRating(post.getRating());
-
+        holder.rbRatingReview.setRating(posts.getRating());
+        holder.cvuserPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.flContainer, new SinglePostFragment(posts))
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                        .addToBackStack(null).addSharedElement(holder.ivImage, "toSingleView").commit();
+            }
+        });
     }
 
 
@@ -69,13 +80,16 @@ public class PostsAdapter extends FirebaseRecyclerAdapter<Post, PostsAdapter.Vie
         private ImageView ivImage;
         private RatingBar rbRatingReview;
         private DatabaseReference databaseReference;
+        private CardView cvuserPost;
+
 
         public ViewHolder(@NonNull View itemView){
             super(itemView);
             ivProfilePic = itemView.findViewById(R.id.ivProfilePic);
             tvUsername = itemView.findViewById(R.id.tvUsername);
-            ivImage = itemView.findViewById(R.id.ivImage);
+            ivImage = itemView.findViewById(R.id.ivimagePost);
             rbRatingReview = itemView.findViewById(R.id.rbRatingReview);
+            cvuserPost = itemView.findViewById(R.id.cvuserPost);
         }
     }
 }
