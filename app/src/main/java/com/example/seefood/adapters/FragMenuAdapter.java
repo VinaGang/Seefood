@@ -56,6 +56,7 @@ public class FragMenuAdapter extends RecyclerView.Adapter<FragMenuAdapter.MenuVi
 
         public TextView tvNameDes, tvPrice;
         public Button btAdd;
+
         public MenuViewHolder(View view) {
             super(view);
             tvNameDes = view.findViewById(R.id.tvNameDes);
@@ -65,7 +66,6 @@ public class FragMenuAdapter extends RecyclerView.Adapter<FragMenuAdapter.MenuVi
 
         public void bind(List<List<String>> menuList, int position) {
             String name;
-            String des;
             String price;
             if(position >= menuList.get(0).size()) {
                 name = "unknown";
@@ -84,6 +84,7 @@ public class FragMenuAdapter extends RecyclerView.Adapter<FragMenuAdapter.MenuVi
                 public void onClick(View view) {
                     //TODO
                     //Save to Cart
+
                 }
             });
         }

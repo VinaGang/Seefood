@@ -1,12 +1,17 @@
 package com.example.seefood.models;
 
 import android.graphics.Point;
+import android.os.AsyncTask;
 import android.util.Log;
 
 import com.google.mlkit.vision.text.Text;
 
 import org.parceler.Parcel;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,12 +22,18 @@ import java.util.List;
 public class SeeFoodMenu_Copy {
     public static final String TAG = "Menu Class";
     List<List<String>> menu;
+    private static final String GOOGLE_SEARCH_API_KEY = "AIzaSyBMaLpJUJuHzLpwu-1-oUXj2jhIiCg-f0M";
+    private static final String HEAD_SEARCH_REQUEST_URL = "https://customsearch.googleapis.com/customsearch/v1?imgSize=MEDIUM&searchType=image&key=" + GOOGLE_SEARCH_API_KEY + "&q=";
+    private static final String TAIL_SEARCH_REQUEST_URL = "HTTP/1.1";
     public static final int MARGIN_X_ERROR = 120;
     public static final int MARGIN_Y_ERROR = 12;
+
+    private String getFullRequestURL(String searchKey){
+        return HEAD_SEARCH_REQUEST_URL + searchKey + TAIL_SEARCH_REQUEST_URL;
+    }
     public SeeFoodMenu_Copy(Text result){
         menu = getMenu(result);
     }
-
     public SeeFoodMenu_Copy(List<List<String>> menu){
       this.menu = menu;
     }
@@ -116,4 +127,11 @@ public class SeeFoodMenu_Copy {
         }
         return false;
     }
+
+    public void searchPicture(String searchKey) {
+        String searchURL = getFullRequestURL(searchKey);
+
+    }
+
+
 }
