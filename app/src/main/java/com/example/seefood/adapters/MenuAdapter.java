@@ -62,8 +62,26 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
         }
 
         public void bind(List<List<String>> menuList, int position) {
-            tvNameDes.setText(menuList.get(0).get(position) +"\n"+ menuList.get(1).get(position));
-            tvPrice.setText(menuList.get(2).get(position));
+            String name;
+            String des;
+            String price;
+            if(position >= menuList.get(0).size()) {
+                name = "unknown";
+            }else{
+                name = menuList.get(0).get(position);
+            }
+            if(position >= menuList.get(1).size()) {
+                des = "unknown";
+            }else{
+                des = menuList.get(1).get(position);
+            }
+            if(position >= menuList.get(2).size()) {
+                price = "NA";
+            }else{
+                price = menuList.get(2).get(position);
+            }
+            tvNameDes.setText(name +"\n"+ des);
+            tvPrice.setText(price);
         }
 
     }

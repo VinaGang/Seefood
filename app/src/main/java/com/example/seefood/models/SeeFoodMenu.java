@@ -102,21 +102,32 @@ public class SeeFoodMenu {
             }catch (NumberFormatException nfe){
                 nfe.printStackTrace();
             }
-            Log.d(TAG, items.get(i).toString());
+
         }
         //Move the prices to the end
+        Log.d(TAG, "***************************");
+        Log.d(TAG, items.toString());
         if(pricesIndex != 2){
+            //swap
             items.add(pricesIndex, items.get(2));
             items.remove(pricesIndex + 1);
             items.add(2, prices);
             items.remove(3);
         }
-
+        Log.d(TAG, items.toString());
+        Log.d(TAG, "***************************");
         //refine the items
         for(int i= items.size() - 1; i>=3 ; i--) {
             items.remove(i);
         }
         //This is how to use it:
+        Log.d(TAG, items.toString());
+        Log.d(TAG, "***************************");
+
+        for(int i=0; i<3; i++) {
+            Log.d(TAG, String.valueOf(items.get(i).size()));
+        }
+        Log.d(TAG, "***************************");
 
         return items;
     }
