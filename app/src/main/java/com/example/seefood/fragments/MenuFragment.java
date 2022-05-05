@@ -13,15 +13,19 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.seefood.R;
+import com.example.seefood.adapters.FragMenuAdapter;
 import com.example.seefood.adapters.MenuAdapter;
 import com.example.seefood.models.SeeFoodMenu;
 import com.example.seefood.models.SeeFoodMenu_Copy;
 
 import org.parceler.Parcels;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MenuFragment extends Fragment {
     public static final String TAG = "MenuFragment";
-    private MenuAdapter menuAdapter;
+    private FragMenuAdapter menuAdapter;
     private RecyclerView rvMenu;
     SeeFoodMenu_Copy seeFoodMenu;
     private Toolbar tbFragMenu;
@@ -34,10 +38,20 @@ public class MenuFragment extends Fragment {
 
 //        Intent i = view.getIntent();
         seeFoodMenu = new SeeFoodMenu_Copy();
-        menuAdapter = new MenuAdapter(getContext(), seeFoodMenu);
+        menuAdapter = new FragMenuAdapter(getContext(), seeFoodMenu);
         rvMenu.setAdapter(menuAdapter);
         rvMenu.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        //Fake data
+        List<String> names = new ArrayList<>();
+        names.add("Pho Dac Biet");
+        List<String> prices = new ArrayList<>();
+        prices.add("12.00");
+        List<List<String>> menu = new ArrayList<>();
+        menu.add(names);
+        menu.add(prices);
+
+        seeFoodMenu = new SeeFoodMenu_Copy(menu);
 //        seeFoodMenu = (SeeFoodMenu) Parcels.unwrap(getParcelableExtra("menu"));
         menuAdapter.addAll(seeFoodMenu);
         super.onViewCreated(view, savedInstanceState);

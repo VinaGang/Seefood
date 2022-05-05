@@ -23,6 +23,10 @@ public class SeeFoodMenu_Copy {
         menu = getMenu(result);
     }
 
+    public SeeFoodMenu_Copy(List<List<String>> menu){
+      this.menu = menu;
+    }
+
     public SeeFoodMenu_Copy(){
     }
 
