@@ -11,21 +11,30 @@ import java.security.PrivateKey;
 
 public class GoogleImageSearchAPI {
     private static final String GOOGLE_SEARCH_API_KEY = "AIzaSyBMaLpJUJuHzLpwu-1-oUXj2jhIiCg-f0M";
-    private static final String HEAD_SEARCH_REQUEST_URL = "https://customsearch.googleapis.com/customsearch/v1?imgSize=MEDIUM&searchType=image&key=" + GOOGLE_SEARCH_API_KEY + "&q=";
+    private static final String GOOGLE_CX_KEY = "9e9e2f9dce55be936";
+  //  private static final String HEAD_SEARCH_REQUEST_URL = " https://customsearch.googleapis.com/customsearch/v1?cx="+ GOOGLE_CX_KEY +"&key=" + GOOGLE_SEARCH_API_KEY +"&searchType=image&imgSize=MEDIUM&q=";
+    private static final String HEAD_SEARCH_REQUEST_URL =  "https://customsearch.googleapis.com/customsearch/v1?cx=9e9e2f9dce55be936&&key=AIzaSyBMaLpJUJuHzLpwu-1-oUXj2jhIiCg-f0M&searchType=image&q=";
+
     private static final String TAIL_SEARCH_REQUEST_URL = "HTTP/1.1";
     private static final String TAG = "GoogleImageSearchAPI";
 
     private String myUrl;
     private String picURL;
 
-    public GoogleImageSearchAPI(String searchKey){
-        myUrl = HEAD_SEARCH_REQUEST_URL + searchKey + TAIL_SEARCH_REQUEST_URL;
+    public GoogleImageSearchAPI(){
+
     }
-    public String getPicURL(){
+
+    public static String getSearchImageURL(String searchKey){
+        return HEAD_SEARCH_REQUEST_URL  + searchKey ;
+    }
+    public String searchPicture(String searchKey){
+        myUrl = HEAD_SEARCH_REQUEST_URL +  searchKey ;
         MyAsyncTasks myAsyncTasks = new MyAsyncTasks();
-        picURL = myAsyncTasks.doInBackground();
+        myAsyncTasks.execute();
         return  picURL;
     }
+
     public class MyAsyncTasks extends AsyncTask<String, String, String> {
 
         @Override
@@ -47,7 +56,7 @@ public class GoogleImageSearchAPI {
                 HttpURLConnection urlConnection = null;
                 try {
                     url = new URL(myUrl);
-                    //open a URL coonnection
+                    //open a URL connection
 
                     urlConnection = (HttpURLConnection) url.openConnection();
 
@@ -79,12 +88,14 @@ public class GoogleImageSearchAPI {
                 return "Exception: " + e.getMessage();
             }
             picURL = result;
+            Log.d(TAG, picURL);
             return result;
         }
 
         @Override
         protected void onPostExecute(String s) {
             // show results
+            Log.d(TAG, "POST: " + picURL);
         }
     }
 

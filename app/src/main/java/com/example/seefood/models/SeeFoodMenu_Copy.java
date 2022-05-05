@@ -103,6 +103,9 @@ public class SeeFoodMenu_Copy {
             }
         }
 
+        for (int i = 0; i < names.size(); i++){
+            names.set(i, refineName(names.get(i)));
+        }
         List<List<String>> items = new ArrayList<>();
         items.add(names);
         items.add(prices);
@@ -111,7 +114,16 @@ public class SeeFoodMenu_Copy {
 
         return items;
     }
-
+    private static String refineName(String name){
+        String result = "";
+        for(int i=0; i<name.length(); i++){
+            char c = name.charAt(i);
+            if(c != '.' && c != '&' && !Character.isDigit(c)){
+                result = result + c;
+            }
+        }
+        return result;
+    }
     private static  boolean isInlines(int x, List<Integer> desList, int margin){
         for (Integer i: desList
              ) {
