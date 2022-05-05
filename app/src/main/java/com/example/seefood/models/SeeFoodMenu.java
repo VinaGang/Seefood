@@ -16,7 +16,7 @@ import java.util.List;
 public class SeeFoodMenu {
     public static final String TAG = "Menu Class";
     List<List<String>> menu;
-    public static final int MARGIN_ERROR = 17;
+    public static final int MARGIN_ERROR = 12;
     public SeeFoodMenu(Text result){
         menu = getMenu(result);
     }
@@ -33,11 +33,14 @@ public class SeeFoodMenu {
         String resultText = result.getText();
 
         List<Integer> pos = new ArrayList<>();
+        pos.add(0);
+        pos.add(0);
+        pos.add(0);
 
         for (Text.TextBlock block : result.getTextBlocks()) {
             for (Text.Line line : block.getLines()) {
                 Point[] lineCornerPoints = line.getCornerPoints();
-                Log.d(TAG, line.getText() + ": " + lineCornerPoints[0].x);
+                Log.d(TAG, line.getText() + ": " + lineCornerPoints[0].x + ", "+ lineCornerPoints[0].y);
                 if(pos.size() == 0) {
                     pos.add(lineCornerPoints[0].x);
                 }else {
@@ -71,7 +74,6 @@ public class SeeFoodMenu {
             }
         }
 
-
         //sort the items by size
         Comparator<List<String>> stringLengthComparator = new Comparator<List<String>>()
         {
@@ -83,10 +85,34 @@ public class SeeFoodMenu {
         };
 
         Collections.sort(items, stringLengthComparator);
+        List<String> prices = new ArrayList<>();
+        int pricesIndex = 2;
+
+        //Check if this is an prices array
         for(int i=0; i< 3; i++){
+            //check the last 1 digits
+            String item = items.get(i).get(0);
+            String lastChar = item.substring(item.length() -2, item.length() -1);
+            int lastC;
+            try{
+                lastC = Integer.parseInt(lastChar);
+                prices = items.get(i);
+                pricesIndex = i;
+                break;
+            }catch (NumberFormatException nfe){
+                nfe.printStackTrace();
+            }
             Log.d(TAG, items.get(i).toString());
         }
+        //Move the prices to the end
+        if(pricesIndex != 2){
+            items.add(pricesIndex, items.get(2));
+            items.remove(pricesIndex + 1);
+            items.add(2, prices);
+            items.remove(3);
+        }
 
+        //refine the items
         for(int i= items.size() - 1; i>=3 ; i--) {
             items.remove(i);
         }
