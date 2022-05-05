@@ -39,11 +39,14 @@
 
     <ImageView
         android:id="@+id/ivMenuAdd"
-        android:layout_width="97dp"
-        android:layout_height="68dp"
-        android:layout_marginStart="32dp"
+        android:layout_width="95dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="20dp"
+        android:tint="#5463B6"
         app:layout_constraintBottom_toBottomOf="@+id/tvMenuPrice"
         app:layout_constraintStart_toEndOf="@+id/tvMenuName"
         app:layout_constraintTop_toTopOf="@+id/tvMenuName"
-        app:srcCompat="@drawable/ic_add_menu" />
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/ic_addtocartbutton" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
