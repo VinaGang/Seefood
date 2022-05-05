@@ -35,12 +35,12 @@ public class CartAdapter extends FirebaseRecyclerAdapter<CartItem, CartAdapter.V
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        ImageView ivFoodImage;
-        TextView tvFoodName;
-        TextView tvPrice;
-        TextView tvAmount;
-        ImageView ivAddBtn;
-        ImageView ivMinusBtn;
+        private ImageView ivFoodImage;
+        private TextView tvFoodName;
+        private TextView tvPrice;
+        private TextView tvAmount;
+        private ImageView ivAddBtn;
+        private ImageView ivMinusBtn;
 
         public ViewHolder(@NonNull View itemView){
             super(itemView);
@@ -62,7 +62,7 @@ public class CartAdapter extends FirebaseRecyclerAdapter<CartItem, CartAdapter.V
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull CartItem cartItem) {
-        Log.d("MovieAdapter", "onBindViewHolder" + position);
+        Log.d("CartAdapter", "onBindViewHolder" + position);
         Glide.with(context).load(cartItem.getFoodImagePath()).into(holder.ivFoodImage);
         holder.tvFoodName.setText(cartItem.getFoodName());
         holder.tvPrice.setText("$"+Float.toString(cartItem.getPrice()));

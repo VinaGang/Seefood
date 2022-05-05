@@ -14,12 +14,13 @@ public class CartItem {
     String foodName;
     float price;
     int amount;
-    //User user;
+    String userId;
 
 
     public CartItem(){};
 
-    public CartItem(String foodImagePath, String foodName, float price, int amount){
+    public CartItem(String userId, String foodImagePath, String foodName, float price, int amount){
+        this.userId = userId;
         this.foodImagePath = foodImagePath;
         this.foodName = foodName;
         this.price = price;
@@ -41,4 +42,6 @@ public class CartItem {
     public int getAmount(){
         return amount;
     }
+
+    public String getUserId(){return userId;}
 }

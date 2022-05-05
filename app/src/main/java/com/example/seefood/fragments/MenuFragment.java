@@ -1,68 +1,61 @@
 package com.example.seefood.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.seefood.R;
-import com.example.seefood.adapters.FragMenuAdapter;
-import com.example.seefood.adapters.MenuAdapter;
-import com.example.seefood.models.SeeFoodMenu;
-import com.example.seefood.models.SeeFoodMenu_Copy;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
-import org.parceler.Parcels;
+import com.example.seefood.R;
+import com.example.seefood.adapters.CartAdapter;
+import com.example.seefood.adapters.MenuAdapter;
+import com.example.seefood.models.CartItem;
+import com.example.seefood.models.MenuItem;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class MenuFragment extends Fragment {
-    public static final String TAG = "MenuFragment";
-    private FragMenuAdapter menuAdapter;
-    private RecyclerView rvMenu;
-    SeeFoodMenu_Copy seeFoodMenu;
-    private Toolbar tbFragMenu;
+    private MenuAdapter menuAdapter;
+    List<MenuItem> menuItems = new ArrayList<>();
+    MenuItem menuTrial = new MenuItem("https://delightfulplate.com/wp-content/uploads/2020/09/Vietnamese-Crepe-Banh-Xeo-featured.jpg",
+            "Banh Xeo", 9);
 
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        rvMenu = view.findViewById(R.id.rvMenu);
-        tbFragMenu = view.findViewById(R.id.tbFragMenu);
-        ((AppCompatActivity) getActivity()).setSupportActionBar(tbFragMenu);
-
-//        Intent i = view.getIntent();
-        seeFoodMenu = new SeeFoodMenu_Copy();
-        menuAdapter = new FragMenuAdapter(getContext(), seeFoodMenu);
-        rvMenu.setAdapter(menuAdapter);
-        rvMenu.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        //Fake data
-        List<String> names = new ArrayList<>();
-        names.add("Pho Dac Biet");
-        List<String> prices = new ArrayList<>();
-        prices.add("12.00");
-        List<List<String>> menu = new ArrayList<>();
-        menu.add(names);
-        menu.add(prices);
-
-        seeFoodMenu = new SeeFoodMenu_Copy(menu);
-//        seeFoodMenu = (SeeFoodMenu) Parcels.unwrap(getParcelableExtra("menu"));
-        menuAdapter.addAll(seeFoodMenu);
-        super.onViewCreated(view, savedInstanceState);
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_menu, container, false);
+
     }
 
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        RecyclerView rvMenuItems = view.findViewById(R.id.rvMenuItems);
+        menuItems.add(menuTrial);
+
+        //Create adapter
+        menuAdapter = new MenuAdapter(getContext(), menuItems);
+
+        //Set adapter on the recycler view
+        rvMenuItems.setAdapter(menuAdapter);
+
+        menuAdapter.notifyDataSetChanged();
+
+        // Set a layout Manager on the recycler view
+        rvMenuItems.setLayoutManager(new LinearLayoutManager(getContext()));
+
+    }
 }
