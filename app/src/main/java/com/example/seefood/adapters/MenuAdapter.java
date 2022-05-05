@@ -1,5 +1,6 @@
 package com.example.seefood.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +16,8 @@ import com.bumptech.glide.Glide;
 import com.example.seefood.R;
 import com.example.seefood.models.CartItem;
 import com.example.seefood.models.MenuItem;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -28,8 +31,9 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>{
     public static final String CART_ITEM_KEY = "cartItem";
 
     final DatabaseReference ref = FirebaseDatabase.getInstance().getReference(CART_ITEM_KEY);
-
-    public MenuAdapter(List<MenuItem> menuItems){
+    final FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+    public MenuAdapter(Context context, List<MenuItem> menuItems){
+        this.context = context;
         this.menuItems = menuItems;
     }
 
@@ -57,11 +61,24 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Log.d("MenuAdapter", "onBindViewHolder" + position);
         Glide.with(context).load(menuItems.get(position).getMenuImagePath()).into(holder.ivMenuImage);
         holder.tvMenuName.setText(menuItems.get(position).getMenuName());
         holder.tvMenuPrice.setText("$"+Float.toString(menuItems.get(position).getMenuPrice()));
+
+        holder.ivMenuAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String userId = currentUser.getUid();
+                String keyID = ref.push().getKey();
+
+                MenuItem item = menuItems.get(position);
+                CartItem itemAdded = new CartItem(userId, item.getMenuImagePath(), item.getMenuName(), item.getMenuPrice(), 1);
+
+                ref.child(keyID).setValue(itemAdded);
+            }
+        });
     }
     @Override
     public int getItemCount() {

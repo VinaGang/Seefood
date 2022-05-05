@@ -20,26 +20,30 @@
         android:layout_width="170dp"
         android:layout_height="25dp"
         android:layout_marginStart="12dp"
+        android:layout_marginTop="16dp"
         android:text="TextView"
+        android:textSize="22sp"
         app:layout_constraintStart_toEndOf="@+id/ivMenuImage"
-        tools:layout_editor_absoluteY="16dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvMenuPrice"
         android:layout_width="170dp"
         android:layout_height="25dp"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="12dp"
         android:text="TextView"
+        android:textSize="22sp"
         app:layout_constraintStart_toEndOf="@+id/ivMenuImage"
         app:layout_constraintTop_toBottomOf="@+id/tvMenuName" />
 
     <ImageView
         android:id="@+id/ivMenuAdd"
-        android:layout_width="69dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="36dp"
+        android:layout_width="97dp"
+        android:layout_height="68dp"
+        android:layout_marginStart="32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvMenuPrice"
         app:layout_constraintStart_toEndOf="@+id/tvMenuName"
-        app:srcCompat="@drawable/ic_add_menu"
-        tools:layout_editor_absoluteY="28dp" />
+        app:layout_constraintTop_toTopOf="@+id/tvMenuName"
+        app:srcCompat="@drawable/ic_add_menu" />
 </androidx.constraintlayout.widget.ConstraintLayout>

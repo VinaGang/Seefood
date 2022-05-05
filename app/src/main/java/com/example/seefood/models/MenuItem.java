@@ -24,4 +24,6 @@ public class MenuItem {
     public float getMenuPrice(){
         return menuPrice;
     }
+
+
 }
