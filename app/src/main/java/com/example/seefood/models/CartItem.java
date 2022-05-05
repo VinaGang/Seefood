@@ -20,6 +20,7 @@ public class CartItem {
     public CartItem(){};
 
     public CartItem(String userId, String foodImagePath, String foodName, float price, int amount){
+        this.userId = userId;
         this.foodImagePath = foodImagePath;
         this.foodName = foodName;
         this.price = price;

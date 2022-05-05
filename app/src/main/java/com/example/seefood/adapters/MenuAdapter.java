@@ -77,6 +77,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>{
                 CartItem itemAdded = new CartItem(userId, item.getMenuImagePath(), item.getMenuName(), item.getMenuPrice(), 1);
 
                 ref.child(keyID).setValue(itemAdded);
+
             }
         });
     }
