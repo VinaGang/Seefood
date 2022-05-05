@@ -2,11 +2,17 @@ package com.example.seefood.adapters;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.seefood.APIs.GoogleImageSearchAPI;
 import com.example.seefood.R;
 import com.example.seefood.models.SeeFoodMenu_Copy;
@@ -74,6 +80,36 @@ public class CreateMenuAdapter extends RecyclerView.Adapter<CreateMenuAdapter.Me
             tvPrice = view.findViewById(R.id.tvPrice);
         }
 
+        public void onItemImagePopupWindowClick(View view, String pictureURL) {
+            Log.d(TAG, "OnItemImagePopup: " + pictureURL);
+            // inflate the layout of the popup window
+            LayoutInflater inflater = (LayoutInflater)
+                    context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View popupView = inflater.inflate(R.layout.popup_view_photo, null);
+            ImageView ivPopupImage = popupView.findViewById(R.id.ivPopupImage);
+            Glide.with(context).load(pictureURL).into(ivPopupImage);
+
+            // create the popup window
+            int width = LinearLayout.LayoutParams.MATCH_PARENT;
+            int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+            // lets taps outside the popup also dismiss it
+            final PopupWindow popupWindow = new PopupWindow(popupView, width, height, true);
+            // show the popup window
+            // which view you pass in doesn't matter, it is only used for the window token
+            popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+            // dismiss the popup window when touched
+
+
+            popupView.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    popupWindow.dismiss();
+                    return false;
+                }
+            });
+        }
+
         public void bind(List<List<String>> menuList, int position) {
             String name;
             String des;
@@ -115,6 +151,7 @@ public class CreateMenuAdapter extends RecyclerView.Adapter<CreateMenuAdapter.Me
                                     Log.d(TAG, picList.get(i));
                                 }
 
+                                onItemImagePopupWindowClick(view, picList.get(0));
                             } catch (JSONException exception) {
                                 exception.printStackTrace();
                             }
