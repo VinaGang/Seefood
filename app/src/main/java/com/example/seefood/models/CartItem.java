@@ -14,6 +14,7 @@ public class CartItem {
     String foodName;
     float price;
     int amount;
+    //User user;
 
 
     public CartItem(){};

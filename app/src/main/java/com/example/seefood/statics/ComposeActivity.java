@@ -68,7 +68,8 @@ public class ComposeActivity extends AppCompatActivity {
         currentUser = mAuth.getCurrentUser();
 
         //get data of current user
-        userDatabaseReference = firebaseDatabase.getReference("user").child(currentUser.getUid());
+        userID = currentUser.getUid();
+        userDatabaseReference = firebaseDatabase.getReference("user").child(userID);
 
         userDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -122,8 +123,8 @@ public class ComposeActivity extends AppCompatActivity {
     }
 
     public void updateUI() {
-        String keyID = databaseReference.push().getKey();
-        databaseReference.child(keyID).setValue(composePost);
+        String postID = databaseReference.push().getKey();
+        databaseReference.child(postID).setValue(composePost);
         finish();
     }
 
@@ -141,7 +142,8 @@ public class ComposeActivity extends AppCompatActivity {
 
                                 imageURL = task.getResult().toString();
                                 description = etDescription.getText().toString();
-                                composePost = new Post(description, imageURL, userRating, curUser);
+                                userID = currentUser.getUid();
+                                composePost = new Post(description, imageURL, userRating, userID, curUser);
                                 updateUI();
 
                                 if(description == null) {
