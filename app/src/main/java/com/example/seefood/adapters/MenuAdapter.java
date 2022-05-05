@@ -1,6 +1,7 @@
 package com.example.seefood.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,15 +14,19 @@ import com.example.seefood.models.SeeFoodMenu_Copy;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder> {
 
     private final Context context;
     private SeeFoodMenu_Copy menu;
+    private List<String> foodName, foodPrice;
     public MenuAdapter(Context context, SeeFoodMenu_Copy menu) {
         this.context = context;
         this.menu = menu;
+        foodName = new ArrayList<>();
+        foodPrice = new ArrayList<>();
     }
 
     public void addAll(SeeFoodMenu_Copy menu){
@@ -50,6 +55,13 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
     public int getItemCount() {
         if(menu == null || menu.getMenu() == null || menu.getMenu().isEmpty()) return 0;
         return menu.getMenu().get(1).size();
+    }
+
+    public List<String> getFoodNames(){
+        return foodName;
+    }
+    public List<String> getFoodPrice(){
+        return foodPrice;
     }
 
     public class MenuViewHolder extends RecyclerView.ViewHolder {
@@ -83,6 +95,9 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
 //            }
             tvNameDes.setText(name);
             tvPrice.setText(price);
+
+            foodName.add(name);
+            foodPrice.add(price);
         }
 
     }

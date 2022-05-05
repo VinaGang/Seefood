@@ -30,15 +30,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:padding="20dp"
             android:background="@drawable/box"
             android:backgroundTint="@color/seefood_light_blue"
-            android:text="Get Text in Image"
+            android:fontFamily="@font/bai_jamjuree_medium"
+            android:padding="20dp"
+            android:text="Menufy!"
             android:textColor="#595959"
             android:visibility="invisible"
-            android:fontFamily="@font/bai_jamjuree_medium"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ivSampleImage" />
 
@@ -52,20 +51,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/selectImageText"
             tools:visibility="invisible" />
-
-        <TextView
-            android:id="@+id/tvResultText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:fontFamily="sans-serif-condensed"
-            android:textColor="#474646"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageBtn"
-            tools:text="Sample Text" />
 
         <TextView
             android:id="@+id/selectImageText"

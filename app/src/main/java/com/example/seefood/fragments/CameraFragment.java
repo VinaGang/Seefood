@@ -1,6 +1,8 @@
 package com.example.seefood.fragments;
 
 
+import static android.app.Activity.RESULT_OK;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,11 +12,16 @@ import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -58,12 +65,12 @@ public class CameraFragment extends Fragment {
 
     private static final String TAG = "CameraFragment";
     private ActivityResultLauncher<CropImageContractOptions> cropImage;
-
+    private ActivityResultLauncher<Intent> saveMenu;
     //inputImage for ML Kit
     InputImage image;
 
     //textview for result
-    TextView tvResultText, selectImageText;
+    TextView selectImageText;
 
     //image
     ImageView ivImage, lookArrowCamera, cameraIcon;
@@ -73,18 +80,25 @@ public class CameraFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        saveMenu = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if(result.getResultCode() == RESULT_OK){
+                        Log.i(TAG, "User saved the menu");
+                    }
+                });
 
         cropImage = registerForActivityResult(new CropImageContract(), result -> {
             if(result.isSuccessful()){
 
                 imageBtn.setVisibility(View.VISIBLE);
-                selectImageText.setVisibility(View.GONE);
+                selectImageText.setText("Selected picture is:");
                 lookArrowCamera.setVisibility(View.GONE);
                 cameraIcon.setVisibility(View.GONE);
 
                 Glide.with(getContext()).load(result.getUriContent()).into(ivImage);
             }
         });
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_camera, container, false);
     }
@@ -103,7 +117,6 @@ public class CameraFragment extends Fragment {
         imageBtn = view.findViewById(R.id.imageBtn);
 
         //Retrieve the textView for result
-        tvResultText = view.findViewById(R.id.tvResultText);
         selectImageText = view.findViewById(R.id.selectImageText);
 
         lookArrowCamera = view.findViewById(R.id.lookArrowCamera);
@@ -130,7 +143,9 @@ public class CameraFragment extends Fragment {
                                 SeeFoodMenu_Copy menu = new SeeFoodMenu_Copy(text);
                                 Intent intent = new Intent(getContext(), CreateMenuActivity.class);
                                 intent.putExtra("menu", Parcels.wrap(menu));
-                                startActivity(intent);
+
+                                saveMenu.launch(intent);
+                                //startActivity(intent);
                             })
                             .addOnFailureListener(e -> Log.e(TAG, "Unsuccessful"));
         });
@@ -156,24 +171,4 @@ public class CameraFragment extends Fragment {
         return true;
     }
 
-    private void storeText(Text text) {
-
-        //Create a StringBuilder to store the text
-        StringBuilder stringBuilder = new StringBuilder();
-
-        //append each block in the StringBuilder
-        for(Text.TextBlock block: text.getTextBlocks()){
-            stringBuilder.append(block.getText()).append("\n");
-        }
-
-        Log.i(TAG, "the text is: " + stringBuilder);
-
-        if(stringBuilder.length() == 0){
-            tvResultText.setText("The image does not have text");
-        }
-        else {
-            //set the text to the textview
-            tvResultText.setText(stringBuilder.toString());
-        }
-    }
 }
