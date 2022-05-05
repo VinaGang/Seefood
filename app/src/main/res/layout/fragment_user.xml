@@ -77,10 +77,13 @@
             android:id="@+id/tvRecent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_below="@+id/tvnumPost"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="60dp"
             android:fontFamily="@font/atma"
             android:text="Recent posts"
             android:textColor="#3F51B5"
+            android:textSize="24sp"
             android:textStyle="bold" />
 
     </RelativeLayout>
