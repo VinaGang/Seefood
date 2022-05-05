@@ -34,7 +34,7 @@ public class CreateMenuAdapter extends RecyclerView.Adapter<CreateMenuAdapter.Me
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         // Inflate the custom layout
-        View contactView = inflater.inflate(R.layout.item_menu, parent, false);
+        View contactView = inflater.inflate(R.layout.item_create_menu, parent, false);
         // Return a new holder instance
         return new CreateMenuAdapter.MenuViewHolder(contactView);
     }
