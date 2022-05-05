@@ -25,7 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 public class CartFragment extends Fragment {
 
     private CartAdapter cartAdapter;
-    float total_price = 0;
+    //float total_price = 0;
     
     FirebaseRecyclerOptions<CartItem> options;
     public static final String CART_ITEM_KEY = "cartItem";
@@ -64,11 +64,12 @@ public class CartFragment extends Fragment {
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                float total_price=0;
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                     CartItem cartItem = dataSnapshot.getValue(CartItem.class);
                     total_price += cartItem.getPrice()*cartItem.getAmount();
                 }
-                tvTotalAmount.setText("$"+Float.toString(total_price));
+                tvTotalAmount.setText(String.format("$%,.2f",total_price));
             }
 
             @Override

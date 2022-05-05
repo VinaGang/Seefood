@@ -17,10 +17,16 @@ import com.example.seefood.R;
 import com.example.seefood.models.CartItem;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class CartAdapter extends FirebaseRecyclerAdapter<CartItem, CartAdapter.ViewHolder> {
     private Context context;
     private FirebaseRecyclerOptions<CartItem> cartItems;
+    public static final String CART_ITEM_KEY = "cartItem";
+
+    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference ref = database.getReference(CART_ITEM_KEY);
 
     public CartAdapter(Context context, FirebaseRecyclerOptions<CartItem> cartItems){
         super(cartItems);
@@ -61,6 +67,25 @@ public class CartAdapter extends FirebaseRecyclerAdapter<CartItem, CartAdapter.V
         holder.tvFoodName.setText(cartItem.getFoodName());
         holder.tvPrice.setText("$"+Float.toString(cartItem.getPrice()));
         holder.tvAmount.setText(Integer.toString(cartItem.getAmount()));
+
+        holder.ivAddBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int currentAmount = cartItem.getAmount();
+                ref.child(getRef(position).getKey()).child("amount").setValue(currentAmount+1);
+            }
+        });
+
+        holder.ivMinusBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int currentAmount = cartItem.getAmount();
+                if(currentAmount > 0)
+                ref.child(getRef(position).getKey()).child("amount").setValue(currentAmount-1);
+            }
+        });
+
+
     }
 
 }
