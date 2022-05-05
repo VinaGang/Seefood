@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/catuy/Projects/Seefood/app/src/main/res/drawable/backrepeat.xml" value="0.118" />
+        <entry key="..\:/Users/catuy/Projects/Seefood/app/src/main/res/drawable/bg_gradient.xml" value="0.1" />
         <entry key="..\:/Users/catuy/Projects/Seefood/app/src/main/res/drawable/bg_user.xml" value="0.118" />
         <entry key="..\:/Users/catuy/Projects/Seefood/app/src/main/res/drawable/bg_wave.xml" value="0.1" />
         <entry key="..\:/Users/catuy/Projects/Seefood/app/src/main/res/drawable/box.xml" value="0.117" />
@@ -43,19 +44,13 @@
         <entry key="app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1215" />
         <entry key="app/src/main/res/layout/activity_cart_item.xml" value="0.10572916666666667" />
         <entry key="app/src/main/res/layout/activity_compose.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_create_menu.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.1693840579710145" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1693840579710145" />
         <entry key="app/src/main/res/layout/cart_items.xml" value="0.30009002685546876" />
         <entry key="app/src/main/res/layout/fragment_camera.xml" value="0.1693840579710145" />
         <entry key="app/src/main/res/layout/fragment_cart.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_menu.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/item_frag_menu.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/item_menu.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/item_review.xml" value="0.1" />
         <entry key="app/src/main/res/layout/login_tab_fragment.xml" value="0.1693840579710145" />
-        <entry key="app/src/main/res/layout/menu_items.xml" value="0.25831298828125" />
         <entry key="app/src/main/res/layout/signup_tab_fragment.xml" value="0.1693840579710145" />
         <entry key="app/src/main/res/menu/menu_bottom_navigation.xml" value="0.1" />
       </map>

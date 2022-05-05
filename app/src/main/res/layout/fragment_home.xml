@@ -48,7 +48,7 @@
         android:layout_gravity="end|bottom"
         android:layout_margin="16dp"
         android:layout_marginBottom="52dp"
-        android:src="@android:drawable/ic_menu_edit"
+        android:src="@drawable/ic_edit_button_svgrepo_com"
         app:backgroundTint="#91DDE6"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
