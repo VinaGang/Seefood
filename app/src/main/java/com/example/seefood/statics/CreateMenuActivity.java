@@ -14,8 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.example.seefood.R;
-import com.example.seefood.adapters.MenuAdapter;
-//import com.example.seefood.models.SeeFoodMenu;
+import com.example.seefood.adapters.CreateMenuAdapter;
 import com.example.seefood.models.SeeFoodMenu_Copy;
 
 import org.parceler.Parcels;
@@ -23,7 +22,7 @@ import org.parceler.Parcels;
 public class CreateMenuActivity extends AppCompatActivity {
 
     public static final String TAG = "CreateMenuActivity";
-    private MenuAdapter menuAdapter;
+    private CreateMenuAdapter menuAdapter;
     private RecyclerView rvMenu;
     SeeFoodMenu_Copy seeFoodMenu;
     private Toolbar tbCreateMenu;
@@ -38,7 +37,7 @@ public class CreateMenuActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         seeFoodMenu = new SeeFoodMenu_Copy();
-        menuAdapter = new MenuAdapter(this, seeFoodMenu);
+        menuAdapter = new CreateMenuAdapter(this, seeFoodMenu);
         rvMenu.setAdapter(menuAdapter);
         rvMenu.setLayoutManager(new LinearLayoutManager(this));
 
