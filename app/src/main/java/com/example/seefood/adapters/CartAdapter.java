@@ -17,11 +17,6 @@ import com.example.seefood.R;
 import com.example.seefood.models.CartItem;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-
-import java.util.List;
 
 public class CartAdapter extends FirebaseRecyclerAdapter<CartItem, CartAdapter.ViewHolder> {
     private Context context;
@@ -38,8 +33,8 @@ public class CartAdapter extends FirebaseRecyclerAdapter<CartItem, CartAdapter.V
         TextView tvFoodName;
         TextView tvPrice;
         TextView tvAmount;
-        Button btnAdd;
-        Button btnSub;
+        ImageView ivAddBtn;
+        ImageView ivMinusBtn;
 
         public ViewHolder(@NonNull View itemView){
             super(itemView);
@@ -47,8 +42,8 @@ public class CartAdapter extends FirebaseRecyclerAdapter<CartItem, CartAdapter.V
             tvFoodName = itemView.findViewById(R.id.tvFoodName);;
             tvPrice = itemView.findViewById(R.id.tvPrice);;
             tvAmount = itemView.findViewById(R.id.tvAmount);;
-            btnAdd = itemView.findViewById(R.id.btnAdd);;
-            btnSub = itemView.findViewById(R.id.btnSub);;
+            ivAddBtn = itemView.findViewById(R.id.ivAddBtn);;
+            ivMinusBtn = itemView.findViewById(R.id.ivMinusBtn);;
         }
     }
     @NonNull
