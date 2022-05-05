@@ -113,6 +113,7 @@ public class CameraFragment extends Fragment {
                             .addOnSuccessListener(text -> {
                                 //Intent to create Menu Activity
                                 SeeFoodMenu_Copy menu = new SeeFoodMenu_Copy(text);
+                                Log.d(TAG, menu.getMenuItemsList().toString());
                                 Intent intent = new Intent(getContext(), CreateMenuActivity.class);
                                 intent.putExtra("menu", Parcels.wrap(menu));
                                 startActivity(intent);

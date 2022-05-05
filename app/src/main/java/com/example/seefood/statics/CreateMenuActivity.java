@@ -19,6 +19,9 @@ import com.example.seefood.models.SeeFoodMenu_Copy;
 
 import org.parceler.Parcels;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CreateMenuActivity extends AppCompatActivity {
 
     public static final String TAG = "CreateMenuActivity";

@@ -2,6 +2,7 @@ package com.example.seefood.models;
 
 import android.graphics.Point;
 import android.os.AsyncTask;
+import android.telephony.mbms.MbmsErrors;
 import android.util.Log;
 
 import com.google.mlkit.vision.text.Text;
@@ -22,25 +23,52 @@ import java.util.List;
 public class SeeFoodMenu_Copy {
     public static final String TAG = "Menu Class";
     List<List<String>> menu;
+    List<String> pictureURLs;
     private static final String GOOGLE_SEARCH_API_KEY = "AIzaSyBMaLpJUJuHzLpwu-1-oUXj2jhIiCg-f0M";
     private static final String HEAD_SEARCH_REQUEST_URL = "https://customsearch.googleapis.com/customsearch/v1?imgSize=MEDIUM&searchType=image&key=" + GOOGLE_SEARCH_API_KEY + "&q=";
     private static final String TAIL_SEARCH_REQUEST_URL = "HTTP/1.1";
     public static final int MARGIN_X_ERROR = 120;
     public static final int MARGIN_Y_ERROR = 12;
 
-    private String getFullRequestURL(String searchKey){
-        return HEAD_SEARCH_REQUEST_URL + searchKey + TAIL_SEARCH_REQUEST_URL;
-    }
     public SeeFoodMenu_Copy(Text result){
         menu = getMenu(result);
-    }
-    public SeeFoodMenu_Copy(List<List<String>> menu){
-      this.menu = menu;
+        pictureURLs = new ArrayList<>();
+        for (int i = 0; i < menu.get(0).size(); i++){
+            pictureURLs.add("https://cdn.dribbble.com/users/1012566/screenshots/4187820/topic-2.jpg");
+        }
     }
 
     public SeeFoodMenu_Copy(){
+
     }
 
+    public List<MenuItem> getMenuItemsList(){
+        List<MenuItem> menuItems = new ArrayList<>();
+        menuItems.add(new MenuItem("Empty", "emptu", 0));
+        if(menu != null && menu.size() !=0){
+            menuItems.remove(0);
+            for(int i=0; i< menu.get(0).size(); i++){
+                menuItems.add(getMenuItem(menu.get(0).get(i), menu.get(1).get(i), pictureURLs.get(i)));
+            }
+        }
+        return  menuItems;
+    }
+
+    private MenuItem getMenuItem(  String name, String price, String URL){
+        String pri = "";
+        price = price.trim();
+        Log.d(TAG, "PRICE:" + price);
+        int i=0, j= price.length() -1;
+        while( i>price.length() - 1 || !Character.isDigit(price.charAt(i++)));
+        while(j < 0 || !Character.isDigit(price.charAt(j--))) ;
+        pri = price.substring(i-1, j+2);
+
+        Log.d(TAG, "PRICE:" + pri);
+        Float priF = Float.valueOf(pri);
+
+        MenuItem item = new MenuItem(URL, name, priF);
+        return item;
+    }
     public List<List<String>> getMenu(){
         return menu;
     }
@@ -109,7 +137,6 @@ public class SeeFoodMenu_Copy {
         List<List<String>> items = new ArrayList<>();
         items.add(names);
         items.add(prices);
-
         Log.d(TAG, items.toString());
 
         return items;
@@ -139,11 +166,4 @@ public class SeeFoodMenu_Copy {
         }
         return false;
     }
-
-    public void searchPicture(String searchKey) {
-        String searchURL = getFullRequestURL(searchKey);
-
-    }
-
-
 }
