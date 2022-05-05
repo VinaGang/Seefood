@@ -72,8 +72,8 @@
 
     <ImageView
         android:id="@+id/ivAddBtn"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="21dp"
+        android:layout_height="22dp"
         android:layout_marginStart="16dp"
         android:foregroundGravity="center_vertical"
         android:tint="#5463B6"

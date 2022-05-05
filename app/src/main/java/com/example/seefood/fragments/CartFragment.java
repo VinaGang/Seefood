@@ -16,10 +16,12 @@ import com.example.seefood.R;
 import com.example.seefood.adapters.CartAdapter;
 import com.example.seefood.models.CartItem;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class CartFragment extends Fragment {
@@ -46,7 +48,12 @@ public class CartFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         RecyclerView rvCartItems = view.findViewById(R.id.rvCartItems);
-        options = new FirebaseRecyclerOptions.Builder<CartItem>().setQuery(ref, CartItem.class).build();
+        Query query = FirebaseDatabase.getInstance().getReference(CART_ITEM_KEY).orderByChild("userId").equalTo(FirebaseAuth.getInstance().getUid());
+//        query = FirebaseDatabase.getInstance().getReference("post").orderByChild("userID").equalTo(currentFirebaseUser.getUid());
+//        options = new FirebaseRecyclerOptions.Builder<Post>()
+//                .setQuery(query, Post.class)
+//                .build();
+        options = new FirebaseRecyclerOptions.Builder<CartItem>().setQuery(query, CartItem.class).build();
         tvTotalAmount = view.findViewById(R.id.tvTotalAmount);
 
         //Create adapter

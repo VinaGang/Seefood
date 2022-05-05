@@ -7,15 +7,17 @@ public class Post {
     private String description;
     private String imageURL;
     private float rating;
+    private String userID;
     private User user;
 
     public Post(){};
 
 
-    public Post(String description, String imageURL, float rating, User user) {
+    public Post(String description, String imageURL, float rating, String userID, User user) {
         this.description = description;
         this.imageURL = imageURL;
         this.rating = rating;
+        this.userID = userID;
         this.user = user;
     }
 
@@ -32,6 +34,8 @@ public class Post {
     }
 
     public User getUser() {return user;}
+
+    public String getUserID() {return userID;}
 }
 
 
