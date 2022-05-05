@@ -3,9 +3,15 @@
     <style name="Theme.Seefood" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">#A7C7E7</item>
-        <item name="colorPrimaryDark">#88aed0</item>
+        <item name="colorPrimaryDark">#A7C7E7</item>
         <item name="colorOnPrimary">#a7c7e7</item>
-        <item name="colorAccent">#92b1b6</item>
+        <item name="colorAccent">#A7C7E7</item>
         <!-- Customize your theme here. -->
+    </style>
+    
+    <style name ="Title_Theme" parent ="Theme.Seefood">
+        <item name="android:fontFamily">@font/bai_jamjuree_medium</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:background">@color/seefood_light_blue</item>
     </style>
 </resources>

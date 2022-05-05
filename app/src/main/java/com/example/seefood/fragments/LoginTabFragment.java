@@ -34,12 +34,11 @@ public class LoginTabFragment extends Fragment {
     private EditText etuserEmail;
     private EditText etPassword;
     private TextView tvForgot;
-    private TextView tvGuest;
     private Button btnLogin;
     private FirebaseAuth mAuth;
 
     //Empty constructor
-    public LoginTabFragment(){};
+    public LoginTabFragment(){}
 
     @Nullable
     @Override
@@ -55,7 +54,6 @@ public class LoginTabFragment extends Fragment {
         etPassword = view.findViewById(R.id.etPassword);
         tvForgot = view.findViewById(R.id.tvForgot);
         btnLogin = view.findViewById(R.id.btnLogin);
-        tvGuest = view.findViewById(R.id.tvGuest);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -70,14 +68,6 @@ public class LoginTabFragment extends Fragment {
             }
         });
 
-        tvGuest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getContext(), MainActivity.class);
-                startActivity(i);
-                getActivity().finish();
-            }
-        });
     }
 
     private void loginUserAccount(String email, String password) {

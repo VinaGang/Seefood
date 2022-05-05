@@ -62,10 +62,12 @@ public class CameraFragment extends Fragment {
     InputImage image;
 
     //textview for result
-    TextView tvResultText;
+    TextView tvResultText, selectImageText;
 
     //image
-    ImageView ivImage;
+    ImageView ivImage, lookArrowCamera, cameraIcon;
+
+    Button imageBtn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -73,6 +75,12 @@ public class CameraFragment extends Fragment {
 
         cropImage = registerForActivityResult(new CropImageContract(), result -> {
             if(result.isSuccessful()){
+
+                imageBtn.setVisibility(View.VISIBLE);
+                selectImageText.setVisibility(View.GONE);
+                lookArrowCamera.setVisibility(View.GONE);
+                cameraIcon.setVisibility(View.GONE);
+
                 Glide.with(getContext()).load(result.getUriContent()).into(ivImage);
             }
         });
@@ -91,16 +99,22 @@ public class CameraFragment extends Fragment {
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 
         //Retrieve Button
-        Button imageBtn = view.findViewById(R.id.imageBtn);
+        imageBtn = view.findViewById(R.id.imageBtn);
 
         //Retrieve the textView for result
         tvResultText = view.findViewById(R.id.tvResultText);
+        selectImageText = view.findViewById(R.id.selectImageText);
+
+        lookArrowCamera = view.findViewById(R.id.lookArrowCamera);
+        Glide.with(getActivity()).load(R.drawable.arrow).into(lookArrowCamera);
+
+        cameraIcon = view.findViewById(R.id.cameraIcon);
+        Glide.with(getActivity()).load(R.drawable.camera_gif).into(cameraIcon);
 
         TextRecognizer recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS);
 
         //create a sample image here
         ivImage = view.findViewById(R.id.ivSampleImage);
-
         imageBtn.setOnClickListener(v -> {
 
             //grab the bitmap and pass to the InputImage
@@ -132,8 +146,8 @@ public class CameraFragment extends Fragment {
 
         CropImageContractOptions options = new CropImageContractOptions(null, new CropImageOptions())
                 .setCropShape(CropImageView.CropShape.RECTANGLE)
-                .setCropMenuCropButtonIcon(R.drawable.ic_photo_camera)
                 .setOutputCompressQuality(100)
+                .setCropMenuCropButtonIcon(R.drawable.ic_baseline_check_24)
                 .setGuidelines(CropImageView.Guidelines.ON);
 
         cropImage.launch(options);
