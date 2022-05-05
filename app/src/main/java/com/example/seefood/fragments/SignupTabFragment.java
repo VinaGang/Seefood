@@ -106,6 +106,8 @@ public class SignupTabFragment extends Fragment {
 
     public void updateUI(FirebaseUser currentUser) {
         String userID = currentUser.getUid();
+        //String keyID = ref.push().getKey();
+        //ref.child(keyID).setValue(cartItem);
         mDatabase.child(userID).setValue(user);
         Intent login = new Intent(getContext(), MainActivity.class);
         startActivity(login);
