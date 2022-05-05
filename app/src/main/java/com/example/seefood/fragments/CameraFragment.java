@@ -21,6 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
@@ -84,6 +85,11 @@ public class CameraFragment extends Fragment {
                 result -> {
                     if(result.getResultCode() == RESULT_OK){
                         Log.i(TAG, "User saved the menu");
+
+                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.flContainer, new SuccessFragment())
+                                .commit();
                     }
                 });
 

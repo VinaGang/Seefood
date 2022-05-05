@@ -28,6 +28,7 @@ public class MenuFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+
         rvMenu = view.findViewById(R.id.rvMenu);
         tbFragMenu = view.findViewById(R.id.tbFragMenu);
         ((AppCompatActivity) getActivity()).setSupportActionBar(tbFragMenu);

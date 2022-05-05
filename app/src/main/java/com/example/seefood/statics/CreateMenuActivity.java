@@ -52,7 +52,6 @@ public class CreateMenuActivity extends AppCompatActivity {
         rvMenu = findViewById(R.id.rvMenu);
         tbCreateMenu = findViewById(R.id.tbCreateMenu);
         setSupportActionBar(tbCreateMenu);
-
         tbCreateMenu.setNavigationOnClickListener(view -> {
             finish();
         });
