@@ -25,7 +25,6 @@ import com.google.firebase.database.ValueEventListener;
 public class CartFragment extends Fragment {
 
     private CartAdapter cartAdapter;
-    //float total_price = 0;
     
     FirebaseRecyclerOptions<CartItem> options;
     public static final String CART_ITEM_KEY = "cartItem";
