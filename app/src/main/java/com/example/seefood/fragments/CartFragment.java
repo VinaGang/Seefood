@@ -49,10 +49,7 @@ public class CartFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         RecyclerView rvCartItems = view.findViewById(R.id.rvCartItems);
         Query query = FirebaseDatabase.getInstance().getReference(CART_ITEM_KEY).orderByChild("userId").equalTo(FirebaseAuth.getInstance().getUid());
-//        query = FirebaseDatabase.getInstance().getReference("post").orderByChild("userID").equalTo(currentFirebaseUser.getUid());
-//        options = new FirebaseRecyclerOptions.Builder<Post>()
-//                .setQuery(query, Post.class)
-//                .build();
+
         options = new FirebaseRecyclerOptions.Builder<CartItem>().setQuery(query, CartItem.class).build();
         tvTotalAmount = view.findViewById(R.id.tvTotalAmount);
 

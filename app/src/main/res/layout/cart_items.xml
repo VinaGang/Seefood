@@ -25,6 +25,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:text="Food Name"
+        android:textSize="20dp"
         app:layout_constraintStart_toEndOf="@+id/ivFoodImage"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,18 +35,21 @@
         android:layout_height="30dp"
         android:layout_marginStart="10dp"
         android:text="TextView"
+        android:textSize="20dp"
         app:layout_constraintStart_toEndOf="@+id/ivFoodImage"
         app:layout_constraintTop_toBottomOf="@+id/tvFoodName" />
 
     <TextView
         android:id="@+id/tvAmount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="36dp"
+        android:layout_width="50dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="5dp"
         android:textAlignment="center"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ivAddBtn"
         app:layout_constraintStart_toEndOf="@+id/ivAddBtn"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivAddBtn"
+        app:layout_constraintVertical_bias="0.0"
         tools:text="Amount" />
 
     <View
@@ -58,28 +62,38 @@
 
     <ImageView
         android:id="@+id/ivMinusBtn"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="5dp"
         android:foregroundGravity="center_vertical"
         android:tint="#5463B6"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.434"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/tvAmount"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.43"
+        app:layout_constraintTop_toTopOf="@+id/tvAmount"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/ic_minus_button" />
 
     <ImageView
         android:id="@+id/ivAddBtn"
-        android:layout_width="21dp"
-        android:layout_height="22dp"
-        android:layout_marginStart="16dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="12dp"
         android:foregroundGravity="center_vertical"
         android:tint="#5463B6"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvFoodName"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.43"
+        app:layout_constraintVertical_bias="0.415"
         app:srcCompat="@drawable/ic_add" />
+
+    <ImageView
+        android:id="@+id/ivDeleteBtn"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/btn_dialog" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

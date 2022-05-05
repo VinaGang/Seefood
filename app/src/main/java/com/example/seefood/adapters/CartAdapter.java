@@ -41,6 +41,7 @@ public class CartAdapter extends FirebaseRecyclerAdapter<CartItem, CartAdapter.V
         private TextView tvAmount;
         private ImageView ivAddBtn;
         private ImageView ivMinusBtn;
+        private ImageView ivDeleteBtn;
 
         public ViewHolder(@NonNull View itemView){
             super(itemView);
@@ -50,6 +51,7 @@ public class CartAdapter extends FirebaseRecyclerAdapter<CartItem, CartAdapter.V
             tvAmount = itemView.findViewById(R.id.tvAmount);;
             ivAddBtn = itemView.findViewById(R.id.ivAddBtn);;
             ivMinusBtn = itemView.findViewById(R.id.ivMinusBtn);;
+            ivDeleteBtn = itemView.findViewById(R.id.ivDeleteBtn);;
         }
     }
     @NonNull
@@ -85,7 +87,11 @@ public class CartAdapter extends FirebaseRecyclerAdapter<CartItem, CartAdapter.V
             }
         });
 
-
+        holder.ivDeleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ref.child(getRef(position).getKey()).removeValue();
+            }
+        });
     }
-
 }
