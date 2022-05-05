@@ -117,14 +117,14 @@ public class ComposeActivity extends AppCompatActivity {
                 uploadToFirebase(foodPicUri);
 
             }
+
         });
     }
 
     public void updateUI() {
         String keyID = databaseReference.push().getKey();
         databaseReference.child(keyID).setValue(composePost);
-        Intent login = new Intent(this, MainActivity.class);
-        startActivity(login);
+        finish();
     }
 
     private void uploadToFirebase(Uri imageUri){
@@ -144,7 +144,7 @@ public class ComposeActivity extends AppCompatActivity {
                                 composePost = new Post(description, imageURL, userRating, curUser);
                                 updateUI();
 
-                                if(description == null){
+                                if(description == null) {
                                     Toast.makeText(ComposeActivity.this, "Description cannot be empty!", Toast.LENGTH_SHORT).show();
                                     return;
                                 }
