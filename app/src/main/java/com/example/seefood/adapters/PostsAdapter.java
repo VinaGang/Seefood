@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -19,14 +18,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.seefood.R;
 import com.example.seefood.fragments.SinglePostFragment;
-import com.example.seefood.fragments.UserFragment;
 import com.example.seefood.models.Post;
 import com.example.seefood.models.User;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
-
-import java.util.List;
 
 public class PostsAdapter extends FirebaseRecyclerAdapter<Post, PostsAdapter.ViewHolder> {
 
@@ -89,7 +85,7 @@ public class PostsAdapter extends FirebaseRecyclerAdapter<Post, PostsAdapter.Vie
             tvUsername = itemView.findViewById(R.id.tvUsername);
             ivImage = itemView.findViewById(R.id.ivimagePost);
             rbRatingReview = itemView.findViewById(R.id.rbRatingReview);
-            cvuserPost = itemView.findViewById(R.id.cvuserPost);
+            cvuserPost = itemView.findViewById(R.id.cvcartItem);
         }
     }
 }

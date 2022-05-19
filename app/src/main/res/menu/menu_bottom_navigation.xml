@@ -16,7 +16,7 @@
         android:enabled="true"/>
     <item
         android:id="@+id/action_seefoodMenu"
-        android:icon="@drawable/menu"
+        android:icon="@drawable/ic_paper"
         android:title="action_home"
         app:showAsAction="always"
         android:enabled="true"/>

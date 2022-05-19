@@ -3,97 +3,113 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:backgroundTint="#03A9F4"
-    tools:layout_centerVertical="false">
+    android:layout_height="130dp">
 
-    <ImageView
-        android:id="@+id/ivFoodImage"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_margin="10dp"
-        android:scaleType="centerCrop"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvcartItem"
+        android:layout_width="350dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintVertical_bias="0.533">
 
-    <TextView
-        android:id="@+id/tvFoodName"
-        android:layout_width="150dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:text="Food Name"
-        android:textSize="20dp"
-        app:layout_constraintStart_toEndOf="@+id/ivFoodImage"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/ivFoodImage"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
 
-    <TextView
-        android:id="@+id/tvPrice"
-        android:layout_width="150dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="10dp"
-        android:text="TextView"
-        android:textSize="20dp"
-        app:layout_constraintStart_toEndOf="@+id/ivFoodImage"
-        app:layout_constraintTop_toBottomOf="@+id/tvFoodName" />
+        <TextView
+            android:id="@+id/tvFoodName"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="85dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/amaranth"
+            android:text="Food Name"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/ivFoodImage"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tvAmount"
-        android:layout_width="50dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="5dp"
-        android:textAlignment="center"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/ivAddBtn"
-        app:layout_constraintStart_toEndOf="@+id/ivAddBtn"
-        app:layout_constraintTop_toTopOf="@+id/ivAddBtn"
-        app:layout_constraintVertical_bias="0.0"
-        tools:text="Amount" />
+        <TextView
+            android:id="@+id/tvAmount"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="275dp"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/amaranth"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivAddBtn"
+            app:layout_constraintStart_toEndOf="@+id/ivAddBtn"
+            app:layout_constraintTop_toTopOf="@+id/ivAddBtn"
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="Amount" />
 
-    <View
-        android:id="@+id/divider2"
-        android:layout_width="409dp"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider"
-        tools:layout_editor_absoluteX="26dp"
-        tools:layout_editor_absoluteY="80dp" />
+        <ImageView
+            android:id="@+id/ivMinusBtn"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="305dp"
+            android:layout_marginTop="40dp"
+            android:foregroundGravity="center_vertical"
+            android:tint="#5463B6"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/tvAmount"
+            app:layout_constraintTop_toTopOf="@+id/tvAmount"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/ic_minus_button" />
 
-    <ImageView
-        android:id="@+id/ivMinusBtn"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="5dp"
-        android:foregroundGravity="center_vertical"
-        android:tint="#5463B6"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/tvAmount"
-        app:layout_constraintTop_toTopOf="@+id/tvAmount"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/ic_minus_button" />
+        <ImageView
+            android:id="@+id/ivAddBtn"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="250dp"
+            android:layout_marginTop="40dp"
+            android:foregroundGravity="center_vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvFoodName"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.415"
+            app:srcCompat="@drawable/ic_add"
+            app:tint="#5463B6" />
 
-    <ImageView
-        android:id="@+id/ivAddBtn"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="12dp"
-        android:foregroundGravity="center_vertical"
-        android:tint="#5463B6"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvFoodName"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.415"
-        app:srcCompat="@drawable/ic_add" />
+        <ImageView
+            android:id="@+id/ivDeleteBtn"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="310dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@android:drawable/btn_dialog" />
 
-    <ImageView
-        android:id="@+id/ivDeleteBtn"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/btn_dialog" />
+        <TextView
+            android:id="@+id/tvPrice"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="85dp"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/amaranth"
+            android:text="TextView"
+            android:textSize="20dp" />
+    </androidx.cardview.widget.CardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

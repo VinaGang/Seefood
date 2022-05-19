@@ -67,7 +67,7 @@ public class CartAdapter extends FirebaseRecyclerAdapter<CartItem, CartAdapter.V
         Log.d("CartAdapter", "onBindViewHolder" + position);
         Glide.with(context).load(cartItem.getFoodImagePath()).into(holder.ivFoodImage);
         holder.tvFoodName.setText(cartItem.getFoodName());
-        holder.tvPrice.setText("$"+Float.toString(cartItem.getPrice()));
+        holder.tvPrice.setText(String.format("$%,.2f", cartItem.getPrice()));
         holder.tvAmount.setText(Integer.toString(cartItem.getAmount()));
 
         holder.ivAddBtn.setOnClickListener(new View.OnClickListener() {
