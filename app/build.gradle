@@ -76,5 +76,8 @@ dependencies {
 
     implementation 'org.parceler:parceler-api:1.1.12'
     annotationProcessor 'org.parceler:parceler:1.1.12'
+
+    implementation 'com.airbnb.android:lottie:5.0.3'
+
     implementation 'com.loopj.android:android-async-http:1.4.11'
 }

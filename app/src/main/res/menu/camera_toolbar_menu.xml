@@ -4,10 +4,10 @@
 
     <item
         android:id="@+id/action_camera"
+        android:enabled="true"
         android:icon="@drawable/camera_selector"
         android:title="action_camera"
-        app:showAsAction="always"
-        app:iconTint="@android:color/darker_gray"
-        android:enabled="true"/>
+        app:iconTint="#707070"
+        app:showAsAction="always" />
 
 </menu>

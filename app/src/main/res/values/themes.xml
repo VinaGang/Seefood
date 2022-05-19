@@ -9,4 +9,10 @@
         <!-- Customize your theme here. -->
         <item name="android:windowContentTransitions">true</item>
     </style>
+
+    <style name ="Title_Theme" parent ="Theme.Seefood">
+        <item name="android:fontFamily">@font/bai_jamjuree_medium</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:background">@color/seefood_light_blue</item>
+    </style>
 </resources>

@@ -1,11 +1,13 @@
 package com.example.seefood.models;
 
+import java.io.Serializable;
+
 public class MenuItem {
     private String menuImagePath;
     private String menuName;
     private float menuPrice;
 
-    public MenuItem(){};
+    public MenuItem(){}
 
     public MenuItem(String menuImagePath, String menuName, float menuPrice){
         this.menuImagePath = menuImagePath;
