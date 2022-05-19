@@ -65,8 +65,8 @@ public class CreateMenuActivity extends AppCompatActivity {
         menuAdapter.addAll(seeFoodMenu);
 
         //grab the adapter's data
-        foodName = menuAdapter.getFoodNames();
-        foodPrice = menuAdapter.getFoodPrice();
+        //foodName = menuAdapter.getFoodNames();
+        //foodPrice = menuAdapter.getFoodPrice();
 
         //grab the menu title
         menuTitle = findViewById(R.id.etMenuName);
@@ -86,7 +86,7 @@ public class CreateMenuActivity extends AppCompatActivity {
             case R.id.actionSaveMenu:
                 Log.d(TAG, "actionSaveMenu");
 
-                if(menuTitle.getText().toString().equals("")){
+/*                if(menuTitle.getText().toString().equals("")){
                     Toast.makeText(this, "Please name the menu you want to save", Toast.LENGTH_LONG).show();
                 }
                 else {
@@ -114,11 +114,15 @@ public class CreateMenuActivity extends AppCompatActivity {
                     //Intent intent = new Intent();
                     //setResult(RESULT_OK, intent);
                     //finish();
-                }
-                Intent intent = new Intent(this, MainActivity.class);
-                intent.putExtra("menu", Parcels.wrap(seeFoodMenu.getMenuItemsList()));
+                }*/
+
+                Intent intent = new Intent();
+                //Intent intent = new Intent(this, MainActivity.class);
+                intent.putExtra("menu", Parcels.wrap(seeFoodMenu));
                 intent.putExtra("frag_request", MainActivity.MENU_FRAG_REQUEST);
-                startActivity(intent);
+                setResult(RESULT_OK, intent);
+                finish();
+                //startActivity(intent);
                 break;
             default:
                 return super.onOptionsItemSelected(item);

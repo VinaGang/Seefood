@@ -42,7 +42,6 @@ import com.canhub.cropper.CropImageOptions;
 import com.canhub.cropper.CropImageView;
 
 import com.example.seefood.R;
-import com.example.seefood.models.SeeFoodMenu;
 import com.example.seefood.models.SeeFoodMenu_Copy;
 import com.example.seefood.statics.CreateMenuActivity;
 import com.google.android.gms.tasks.Task;

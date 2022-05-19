@@ -1,3 +1,4 @@
+/*
 package com.example.seefood.fragments;
 
 import android.os.Bundle;
@@ -14,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.seefood.R;
 import com.example.seefood.adapters.SavedMenuAdapter;
 import com.example.seefood.models.RestoMenu;
-import com.example.seefood.models.SeeFoodMenu;
+//import com.example.seefood.models.SeeFoodMenu;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -34,7 +35,7 @@ public class MenuFragment2 extends Fragment {
         Toolbar tbFragMenu = view.findViewById(R.id.tbSavedMenu);
         ((AppCompatActivity) getActivity()).setSupportActionBar(tbFragMenu);
 
-        RecyclerView rvMenuList = view.findViewById(R.id.rvMenuList);
+        //RecyclerView rvMenuList = view.findViewById(R.id.rvMenuList);
 
         menuRef = FirebaseDatabase.getInstance().getReference("menu").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
@@ -44,8 +45,8 @@ public class MenuFragment2 extends Fragment {
 
         menuAdapter = new SavedMenuAdapter(getContext(), options);
 
-        rvMenuList.setAdapter(menuAdapter);
-        rvMenuList.setLayoutManager(new LinearLayoutManager(getContext()));
+       // rvMenuList.setAdapter(menuAdapter);
+        //rvMenuList.setLayoutManager(new LinearLayoutManager(getContext()));
 
         super.onViewCreated(view, savedInstanceState);
     }
@@ -55,7 +56,7 @@ public class MenuFragment2 extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_menu2, container, false);
+        return inflater.inflate(R.layout.fragment_menu, container, false);
     }
 
     @Override
@@ -70,4 +71,4 @@ public class MenuFragment2 extends Fragment {
         menuAdapter.stopListening();
     }
 
-}
+}*/

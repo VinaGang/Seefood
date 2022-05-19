@@ -11,6 +11,7 @@ import org.parceler.Parcel;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.time.LocalDate;
@@ -20,7 +21,7 @@ import java.util.Comparator;
 import java.util.List;
 
 @Parcel
-public class SeeFoodMenu_Copy {
+public class SeeFoodMenu_Copy implements Serializable {
     public static final String TAG = "Menu Class";
     List<List<String>> menu;
     List<String> pictureURLs;

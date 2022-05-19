@@ -85,9 +85,17 @@ public class CameraFragment extends Fragment {
                     if(result.getResultCode() == RESULT_OK){
                         Log.i(TAG, "User saved the menu");
 
+                        SeeFoodMenu_Copy menu = (SeeFoodMenu_Copy) Parcels.unwrap(result.getData().getParcelableExtra("menu"));
+
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("menu", menu);
+
+                        Fragment MenuFragment = new MenuFragment();
+                        MenuFragment.setArguments(bundle);
+
                         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                         fragmentManager.beginTransaction()
-                                .replace(R.id.flContainer, new SuccessFragment())
+                                .replace(R.id.flContainer, MenuFragment)
                                 .commit();
                     }
                 });

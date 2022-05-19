@@ -1,3 +1,4 @@
+/*
 package com.example.seefood.adapters;
 
 import android.app.Activity;
@@ -22,7 +23,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.seefood.R;
-import com.example.seefood.fragments.SavedMenuDetailFragment;
 import com.example.seefood.models.Post;
 import com.example.seefood.models.RestoMenu;
 import com.example.seefood.models.User;
@@ -95,3 +95,4 @@ public class SavedMenuAdapter extends FirebaseRecyclerAdapter<RestoMenu, SavedMe
         }
     }
 }
+*/
